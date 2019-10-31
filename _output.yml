@@ -6,8 +6,8 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Intro to R for Nat. Res. Sci.</a></li>
       after: |
-        <li><a href="https://github.com/bstaton1/au-r-workshop-data" target="blank">Get the Data</a></li>
-    download: ["pdf"]
+        <li><a href="https://github.com/davan690/au-r-workshop" target="blank">Get the Data</a></li>
+    download: ["docx"]
     sharing: null
 bookdown::pdf_book:
   includes:
@@ -16,3 +16,8 @@ bookdown::pdf_book:
   latex_engine: pdflatex
   citation_package: natbib
   keep_tex: yes
+bookdown::word_document2:
+  reference_docx: ms.docx
+  fig_caption: yes
+  toc: yes
+bookdown::html_document2: default

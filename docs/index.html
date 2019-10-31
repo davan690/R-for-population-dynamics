@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Introduction to R for Natural Resource Scientists</title>
   <meta name="description" content="This is a first course in R programming for natural resource scientists. It was developed and has been primarily instructed at Auburn University." />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Introduction to R for Natural Resource Scientists" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="ch1.html">
+<link rel="next" href="ch1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -39,6 +39,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -47,7 +50,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
 <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
@@ -65,26 +68,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -93,9 +97,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -332,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex6-answers"><i class="fa fa-check"></i>Exercise 6 Solutions</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/bstaton1/au-r-workshop-data" target="blank">Get the Data</a></li>
+<li><a href="https://github.com/davan690/au-r-workshop" target="blank">Get the Data</a></li>
 
 </ul>
 
@@ -380,7 +384,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>Prepare Your Computer</h3>
 <div id="install" class="section level4 unnumbered">
 <h4>Installation</h4>
-<p>First off, you will need to get R and RStudio<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> onto your computer. Go to:</p>
+<p>First off, you will need to get R and RStudio<a href="exercise-solutions.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> onto your computer. Go to:</p>
 <ul>
 <li><a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a> to get R and</li>
 <li><a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a> to get RStudio Desktop.</li>
@@ -403,7 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="data-sets" class="section level4 unnumbered">
 <h4>Data Sets</h4>
-<p>The data sets<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+<p>The data sets<a href="exercise-solutions.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 used in this book are hosted on a GitHub repository maintained by the author. It is located here: <a href="https://github.com/bstaton1/au-r-workshop-data" class="uri">https://github.com/bstaton1/au-r-workshop-data</a>.</p>
 <p>To acquire the data for this book, you should:</p>
 <ol style="list-style-type: decimal">
@@ -452,19 +456,19 @@ used in this book are hosted on a GitHub repository maintained by the author. It
 <li><strong>Bold</strong> is intended to provide more emphasis to a word or topic. In general, new topics are introduced this way.</li>
 <li><a href="index.html#notation">Links</a>: this is a link to some other location in this book. External links are provided with a full URL.</li>
 <li><span class="math inline">\(Equations\)</span>: it is sometimes useful to describe concepts mathematically before showing how to do it in R.</li>
-<li><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>: a footnote containing more information.</li>
+<li><a href="exercise-solutions.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>: a footnote containing more information.</li>
 </ul>
 </div>
 <div id="keyboard-shortcuts" class="section level2 unnumbered">
 <h2>Keyboard Shortcuts</h2>
-<p>Several parts of this book in this book make reference to keyboard shortcuts. They are never necessary, but can help you be more efficient if you commit them to muscle memory. This book assumes you are using a PC for the keyboard shortcuts. If you are using a Mac, they will be different<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For a complete list of RStudio’s keyboard shortcuts specific to your operating system, go to <em>Help &gt; Keyboard Shortcuts Help</em>.</p>
+<p>Several parts of this book in this book make reference to keyboard shortcuts. They are never necessary, but can help you be more efficient if you commit them to muscle memory. This book assumes you are using a PC for the keyboard shortcuts. If you are using a Mac, they will be different<a href="exercise-solutions.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For a complete list of RStudio’s keyboard shortcuts specific to your operating system, go to <em>Help &gt; Keyboard Shortcuts Help</em>.</p>
 </div>
 <div id="development-of-this-book" class="section level2 unnumbered">
 <h2>Development of this Book</h2>
 <p>This book represents the third reincarnation of the Auburn R Workshop Series. The first version was written in Fall 2014 using Microsoft Word, but the author found that making even small changes was clunky - each change to code in the document required a copy-paste of code and output from R to Word. Individual session materials (i.e., handout, exercises, solutions, data) were created in separate documents, saved as PDFs and <code>.xlsx</code> files, and uploaded to a wordpress webpage.</p>
-<p>The second version was written through R <span class="citation">(R Core Team <a href="#ref-R-base">2018</a>)</span> and RStudio using the R packages <code>{rmarkdown}</code> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown">2018</a>)</span> and <code>{knitr}</code> <span class="citation">(Xie <a href="#ref-R-knitr">2018</a><a href="#ref-R-knitr">b</a>, <a href="#ref-knitr-cite">2015</a>)</span>, which allowed the integration of text, code, and output all into one output file. This version was completed in Fall 2015. Like the first version, individual session materials were created in separate documents, and replaced those previously found on the wordpress site.</p>
-<p>This third version was written through R and RStudio but used the R package <code>{bookdown}</code> <span class="citation">(Xie <a href="#ref-R-bookdown">2018</a><a href="#ref-R-bookdown">a</a>)</span> which allowed for the individual sessions to be combined into one “book” by turning each session into a chapter. This facilitated cross-references to topics covered in previous chapters and allows the reader to only refer to one location when trying to remember how to use a skill. It also allowed for multiple formats to be published including both HTML and PDF versions.</p>
-<p>The book is hosted on <a href="https://pages.github.com/">GitHub Pages</a>, and was last built on 08-22-2019.</p>
+<p>The second version was written through R <span class="citation">(R Core Team <a href="#ref-R-base" role="doc-biblioref">2018</a>)</span> and RStudio using the R packages <code>{rmarkdown}</code> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown" role="doc-biblioref">2018</a>)</span> and <code>{knitr}</code> <span class="citation">(Xie <a href="#ref-R-knitr" role="doc-biblioref">2018</a><a href="#ref-R-knitr" role="doc-biblioref">b</a>, <a href="#ref-knitr-cite" role="doc-biblioref">2015</a>)</span>, which allowed the integration of text, code, and output all into one output file. This version was completed in Fall 2015. Like the first version, individual session materials were created in separate documents, and replaced those previously found on the wordpress site.</p>
+<p>This third version was written through R and RStudio but used the R package <code>{bookdown}</code> <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2018</a><a href="#ref-R-bookdown" role="doc-biblioref">a</a>)</span> which allowed for the individual sessions to be combined into one “book” by turning each session into a chapter. This facilitated cross-references to topics covered in previous chapters and allows the reader to only refer to one location when trying to remember how to use a skill. It also allowed for multiple formats to be published including both HTML and PDF versions.</p>
+<p>The book is hosted on <a href="https://pages.github.com/">GitHub Pages</a>, and was last built on 10-31-2019.</p>
 </div>
 <div id="about-the-author" class="section level2 unnumbered">
 <h2>About the Author</h2>
@@ -490,15 +494,6 @@ used in this book are hosted on a GitHub repository maintained by the author. It
 <p>Xie, Yihui. 2018b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr">https://CRAN.R-project.org/package=knitr</a>.</p>
 </div>
 </div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>While it is possible to run R on its own, it is clunky. You are strongly advised to use the RStudio IDE (integrated development environment) given its compactness, neat features, code tools (like syntax and parentheses highlighting). This workshop will assume you are using RStudio<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Many of the data sets used in this book were simulated by the author. Cases in which the data set used was not simulated are noted and a citation to the data source is provided. More details on the individual data sets can be found on the GitHub repository.<a href="index.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>This is a footnote. If you’re viewing this on GitHub Pages, click the arrow to the right to return to the text<a href="index.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>For some keyboard shortcuts, you may just need to swap out the <strong>CTRL</strong> keystroke for the <strong>CMD</strong> keystroke for a Mac computer<a href="index.html#fnref4" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
             </section>
 
           </div>
@@ -510,11 +505,13 @@ used in this book are hosted on a GitHub repository maintained by the author. It
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -532,7 +529,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["au-r-workshop.pdf"],
+"download": ["au-r-workshop.docx"],
 "toc": {
 "collapse": "section"
 }
@@ -547,8 +544,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

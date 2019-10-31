@@ -1,0 +1,1860 @@
+\documentclass[]{book}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+            pdftitle={Introduction to R for Natural Resource Scientists},
+            pdfauthor={Ben Staton},
+            colorlinks=true,
+            linkcolor=blue,
+            citecolor=Blue,
+            urlcolor=blue,
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Introduction to R for Natural Resource Scientists}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Ben Staton}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{with contributions by Henry Hershey}
+
+\usepackage{booktabs}
+\usepackage{pdfpages}
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
+\let\oldmaketitle\maketitle
+\AtBeginDocument{\let\maketitle\relax}
+
+\begin{document}
+\maketitle
+
+% % \thispagestyle{empty}
+% \begin{center}
+% % {\Huge A BOOK}
+% \includegraphics{cover_image.png}
+% % {\huge by Me}
+% \end{center}
+%
+% \let\maketitle\oldmaketitle
+% \maketitle
+
+% \cleardoublepage\newpage\thispagestyle{empty}\null
+% \cleardoublepage\newpage\thispagestyle{empty}\null
+% \cleardoublepage\newpage
+% \thispagestyle{empty}
+% \cleardoublepage\begin{center}
+% \newgeometry{left=0cm,right=0cm,top=0cm,bottom=0cm}
+% \includegraphics{cover_image.png}
+% \restoregeometry
+% \end{center}
+% \setlength{\abovedisplayskip}{-5pt}
+% \setlength{\abovedisplayshortskip}{-5pt}
+
+\includepdf[pages={1}]{img/cover_image.pdf}
+\thispagestyle{empty}
+\let\maketitle\oldmaketitle
+\maketitle
+\thispagestyle{empty}
+
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\hypertarget{overview}{%
+\chapter*{Overview}\label{overview}}
+\addcontentsline{toc}{chapter}{Overview}
+
+This book is intended to be a first course in R programming for natural resource professionals. It is by no means comprehensive (no book about R ever could be), but instead attempts to introduce the main topics needed to get a beginner up and running with applying R to their own work. It is intended to be a companion to in-person workshop sessions, in which each chapter is covered in a 2 hour session, however it can be used as ``self-teach'' manual as well. Although the examples shown have a natural resource/ecological theme, the general skills presented are general to R users across all scientific disciplines.
+
+\hypertarget{what-is-covered}{%
+\section*{What is Covered?}\label{what-is-covered}}
+\addcontentsline{toc}{section}{What is Covered?}
+
+The book is composed of six chapters intended to cover a suite of topics in introductory R programming. In general, the material builds in complexity from chapter to chapter and earlier chapters can be seen as prerequisites for later chapters.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Chapter \ref{ch1}} covers the basics of working in R through RStudio, including the basics of the R coding language and environment.
+\item
+  \textbf{Chapter \ref{ch2}} covers the basics of plotting using the base R graphics functionality.
+\item
+  \textbf{Chapter \ref{ch3}} covers the basics of fitting statistical models using built-in functionality for generalized linear models as well as non-linear models.\\
+\item
+  \textbf{Chapter \ref{ch4}} covers the basics of simulation modeling in R.
+\item
+  \textbf{Chapter \ref{ch5}} covers the basics of the \texttt{\{dplyr\}} and \texttt{\{reshape2\}} packages for manipulating and summarizing large data sets using highly readable code.
+\item
+  \textbf{Chapter \ref{ch6}} covers the basics of producing maps and performing spatial analysis in R. \emph{This chapter was contributed by Henry Hershey}
+\end{itemize}
+
+\hypertarget{prerequisites}{%
+\section*{Prerequisites}\label{prerequisites}}
+\addcontentsline{toc}{section}{Prerequisites}
+
+Chapter \ref{ch1} starts at the first step (installing R) and progresses by assuming no prior knowledge of programming in R or in any other language. In the later chapters, e.g., Chapters \ref{ch3} and \ref{ch4}, an understanding of statistics at the introductory undergraduate level would be helpful but not strictly essential.
+
+There are, however, some tasks you'll need to complete before using this book, which are described in the two sections that follow.
+
+\hypertarget{comp-prep}{%
+\subsection*{Prepare Your Computer}\label{comp-prep}}
+\addcontentsline{toc}{subsection}{Prepare Your Computer}
+
+\hypertarget{install}{%
+\subsubsection*{Installation}\label{install}}
+\addcontentsline{toc}{subsubsection}{Installation}
+
+First off, you will need to get R and RStudio\footnote{While it is possible to run R on its own, it is clunky. You are strongly advised to use the RStudio IDE (integrated development environment) given its compactness, neat features, code tools (like syntax and parentheses highlighting). This workshop will assume you are using RStudio} onto your computer. Go to:
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://cran.rstudio.com/} to get R and
+\item
+  \url{https://www.rstudio.com/products/rstudio/download/} to get RStudio Desktop.
+\end{itemize}
+
+Download the appropriate installation file for your operating system and run that file. All default settings should be fine.
+
+\hypertarget{optional-configuration}{%
+\subsubsection*{Optional Configuration}\label{optional-configuration}}
+\addcontentsline{toc}{subsubsection}{Optional Configuration}
+
+As a matter of personal preference, you are recommended to configure a few settings. Open up RStudio and go to \emph{Tools \textgreater{} Global Options}, and in the section listed ``General'':
+
+\begin{itemize}
+\tightlist
+\item
+  Make sure \emph{Restore .RData into workspace at startup} is \textbf{unchecked}
+\item
+  Make sure \emph{Save workspace to .RData on exit} is set to \textbf{Never}
+\item
+  Make sure \emph{Always save history (even when not saving .RData)} is \textbf{unchecked}.
+\end{itemize}
+
+These settings will prevent you from getting a bunch of useless files and dialog boxes every time you open and close R.
+
+\hypertarget{create-a-book-directory}{%
+\subsubsection*{Create a Book Directory}\label{create-a-book-directory}}
+\addcontentsline{toc}{subsubsection}{Create a Book Directory}
+
+You should create a devoted folder on your computer for this book. All examples will assume this folder is located here: \texttt{C:/Users/YOU/Documents/R-Book}. Change \texttt{YOU} to be specific for your computer.
+
+\hypertarget{data-sets}{%
+\subsubsection*{Data Sets}\label{data-sets}}
+\addcontentsline{toc}{subsubsection}{Data Sets}
+
+The data sets\footnote{Many of the data sets used in this book were simulated by the author. Cases in which the data set used was not simulated are noted and a citation to the data source is provided. More details on the individual data sets can be found on the GitHub repository.}
+used in this book are hosted on a GitHub repository maintained by the author. It is located here: \url{https://github.com/bstaton1/au-r-workshop-data}.
+
+To acquire the data for this book, you should:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Navigate to the GitHub repository
+\item
+  click the green \emph{Clone or download} button at the top right,
+\item
+  click \emph{Download ZIP}
+\item
+  unzip the contents of this folder into the location: \texttt{C:/Users/YOU/Documents/R-Book/Data}
+\end{enumerate}
+
+File organization will be very important for your success in learning to use R. This book will assume your \texttt{R-Book} directory is organized as shown below. Notice that there is a separate folder for the data downloaded from GitHub as well as one for each chapter that will house the R code for that chapter. Do not worry about making all of these folders now, you will do this at the appropriate time as you work your way through this book. For now, just make sure there is a \texttt{Data} folder that contains all of the unzipped contents from the GitHub repository your main \texttt{R-Book} directory.
+
+\begin{verbatim}
+##          levelName
+## 1  R-Book         
+## 2   ¦--Data       
+## 3   ¦   ¦--asl.csv
+## 4   ¦   ¦--...    
+## 5   ¦   °--Ch6    
+## 6   ¦--Chapter1   
+## 7   ¦   ¦--Ch1.R  
+## 8   ¦   ¦--Ex1A.R 
+## 9   ¦   °--Ex1B.R 
+## 10  ¦--Chapter2   
+## 11  ¦   ¦--Ch2.R  
+## 12  ¦   °--Ex2.R  
+## 13  ¦--Chapter3   
+## 14  ¦--Chapter4   
+## 15  ¦--Chapter5   
+## 16  °--Chapter6
+\end{verbatim}
+
+\hypertarget{exercises}{%
+\section*{Exercises}\label{exercises}}
+\addcontentsline{toc}{section}{Exercises}
+
+Following each chapter, there is a set of exercises. You should attempt and complete them, as they give you an opportunity to practice what you learned while reading and typing along. Solutions are provided at the end of this book, however you are \textbf{strongly} recommended to attempt to figure the problems out on your own before looking to how the author would solve them.
+
+Some exercises have bonus questions. These are intended to challenge you with some of the more difficult tasks shown in the chapter or ask you to extend what you learned to a completely different problem. If you can get all of the non-bonus questions without looking at the solutions too much, you can consider yourself to have good understanding of that chapter's material. If you can complete the bonus questions with little or no help, that means you have mastered that chapter's material!
+
+\hypertarget{notation}{%
+\section*{Text Conventions}\label{notation}}
+\addcontentsline{toc}{section}{Text Conventions}
+
+\begin{itemize}
+\tightlist
+\item
+  Regular text: a description of what you you should do, how some code works, or a general narrative of something.
+\item
+  \texttt{monospace}: references something in R
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{this()} references some function
+  \item
+    \texttt{this} references some other object
+  \item
+    \texttt{\{this\}} references an R package
+  \item
+    \texttt{C:/This} is a file path
+  \end{itemize}
+\item
+  \textbf{Bold} is intended to provide more emphasis to a word or topic. In general, new topics are introduced this way.
+\item
+  \protect\hyperlink{notation}{Links}: this is a link to some other location in this book. External links are provided with a full URL.
+\item
+  \(Equations\): it is sometimes useful to describe concepts mathematically before showing how to do it in R.
+\item
+  \footnote{This is a footnote. If you're viewing this on GitHub Pages, click the arrow to the right to return to the text}: a footnote containing more information.
+\end{itemize}
+
+\hypertarget{keyboard-shortcuts}{%
+\section*{Keyboard Shortcuts}\label{keyboard-shortcuts}}
+\addcontentsline{toc}{section}{Keyboard Shortcuts}
+
+Several parts of this book in this book make reference to keyboard shortcuts. They are never necessary, but can help you be more efficient if you commit them to muscle memory. This book assumes you are using a PC for the keyboard shortcuts. If you are using a Mac, they will be different\footnote{For some keyboard shortcuts, you may just need to swap out the \textbf{CTRL} keystroke for the \textbf{CMD} keystroke for a Mac computer}. For a complete list of RStudio's keyboard shortcuts specific to your operating system, go to \emph{Help \textgreater{} Keyboard Shortcuts Help}.
+
+\hypertarget{development-of-this-book}{%
+\section*{Development of this Book}\label{development-of-this-book}}
+\addcontentsline{toc}{section}{Development of this Book}
+
+This book represents the third reincarnation of the Auburn R Workshop Series. The first version was written in Fall 2014 using Microsoft Word, but the author found that making even small changes was clunky - each change to code in the document required a copy-paste of code and output from R to Word. Individual session materials (i.e., handout, exercises, solutions, data) were created in separate documents, saved as PDFs and \texttt{.xlsx} files, and uploaded to a wordpress webpage.
+
+The second version was written through R \citep{R-base} and RStudio using the R packages \texttt{\{rmarkdown\}} \citep{R-rmarkdown} and \texttt{\{knitr\}} \citep{R-knitr, knitr-cite}, which allowed the integration of text, code, and output all into one output file. This version was completed in Fall 2015. Like the first version, individual session materials were created in separate documents, and replaced those previously found on the wordpress site.
+
+This third version was written through R and RStudio but used the R package \texttt{\{bookdown\}} \citep{R-bookdown} which allowed for the individual sessions to be combined into one ``book'' by turning each session into a chapter. This facilitated cross-references to topics covered in previous chapters and allows the reader to only refer to one location when trying to remember how to use a skill. It also allowed for multiple formats to be published including both HTML and PDF versions.
+
+The book is hosted on \href{https://pages.github.com/}{GitHub Pages}, and was last built on 10-31-2019.
+
+\hypertarget{about-the-author}{%
+\section*{About the Author}\label{about-the-author}}
+\addcontentsline{toc}{section}{About the Author}
+
+Ben Staton is a PhD candidate in the School of Fisheries at Auburn University. He studies quantitative methods for assessing fish populations for use in harvest management, with a focus on Pacific salmon in western Alaska. His interests are in population dynamics, Bayesian methods, Monte Carlo methods, and reproducible research. Ben has been using R on a daily basis since the beginning of his graduate work in 2014, and is enthusiastic about helping others learn to use R for their own work.
+
+\hypertarget{ch1}{%
+\chapter{Introduction to the R Environment}\label{ch1}}
+
+\hypertarget{chapter-overview}{%
+\section*{Chapter Overview}\label{chapter-overview}}
+\addcontentsline{toc}{section}{Chapter Overview}
+
+In this first chapter, you will get familiar with the basics of using R. You will learn:
+
+\begin{itemize}
+\tightlist
+\item
+  how to use R as a basic calculator
+\item
+  some basic object types
+\item
+  some basic data classes
+\item
+  some basic data structures
+\item
+  how to read in data
+\item
+  how to produce basic data summaries
+\item
+  how to write out data
+\item
+  how to write your own functions
+\end{itemize}
+
+\hypertarget{before-you-begin}{%
+\section*{Before You Begin}\label{before-you-begin}}
+\addcontentsline{toc}{section}{Before You Begin}
+
+Before you start this chapter, you should make sure you have read and done everything in the \protect\hyperlink{overview}{Overview} pertaining to \protect\hyperlink{comp-prep}{preparing your computer} for working through this book.
+
+\hypertarget{the-r-studio-interface}{%
+\section{The R Studio Interface}\label{the-r-studio-interface}}
+
+When you open up RStudio for the first time, you will see three panes: the left-hand side is the \textbf{console} where results from executed commands are printed, and the two panes on the right are for additional information to help you code more efficiently - don't worry too much about what these are at the moment. For now, focus your attention on the console.
+
+\hypertarget{write-some-simple-code}{%
+\subsection{Write Some Simple Code}\label{write-some-simple-code}}
+
+To start off, you will use R as a simple calculator. Type these commands (not the lines with \texttt{\#\#}, those are output\footnote{The formatting used here includes \texttt{\#\#} on output to denote code and output separately. You won't see the \texttt{\#\#} show up in your console.}) one at a time and hit \textbf{CTRL + ENTER} to run it. The spaces don't matter at all, they are used here for clarity and for styling. To learn more about standard R code styling, check out the section in \citet{adv-r-cite} on it\footnote{Hadley Wickham's R code style guide: \url{http://adv-r.had.co.nz/Style.html}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{3} \OperatorTok{+}\StringTok{ }\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{12}\OperatorTok{/}\DecValTok{4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+Notice that when you run each line, it prints the command and the output to the console.
+
+R is an \textbf{object oriented language}, which means that you fill objects with data and do things with them. Make an object called \texttt{x} that stores the result of the calculation \texttt{3\ +\ 3} (type this and run using \textbf{CTRL + ENTER}):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\DecValTok{3} \OperatorTok{+}\StringTok{ }\DecValTok{3}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that running this line did not return a value as before. This is because in that line you are \textbf{assigning} a value to the object \texttt{x}. You can view the contents of \texttt{x} by typing its name alone and running just that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+
+When used this way, the \texttt{=} sign denotes assignment of the value on the right-hand side to an object with the name on the left-hand side. The \texttt{\textless{}-} serves this same purpose so in this context the two are interchangeable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y <-}\StringTok{ }\DecValTok{2} \OperatorTok{+}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+You can highlight smaller sections of a line to run as well. For example after creating \texttt{y} above, press the \textbf{up arrow} to see the line you just ran, highlight just the \texttt{y}, and press \textbf{CTRL + ENTER}. From this point forward, the verb ``run'' means execute some code using \textbf{CTRL + ENTER}.
+
+You can use your objects together to make a new object:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{z =}\StringTok{ }\NormalTok{y }\OperatorTok{-}\StringTok{ }\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Here are some things to note about object names:}
+
+\begin{itemize}
+\tightlist
+\item
+  Object names can contain any of the following:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    letters
+  \item
+    numbers
+  \item
+    the \texttt{.} or \texttt{\_} symbols
+  \end{itemize}
+\item
+  Object names must start with a letter, not a number or symbol and cannot contain spaces
+\item
+  As a general rule, avoid naming your objects things that already have names in R, e.g., \texttt{data()}, \texttt{mean()}, \texttt{sum()}, \texttt{sd()}, etc.
+\item
+  Capitalization matters: \texttt{A} and \texttt{a} are two different objects
+\item
+  Keep your names short with abbreviations or shorthand
+\end{itemize}
+
+\hypertarget{scripts}{%
+\section{Saving Your Code: Scripts}\label{scripts}}
+
+If you closed R at this moment, your work would be lost. Running code in the console like you have just done \textbf{does not save a record of your work}. To save R code, you must use what is called a \textbf{script}, which is a plain-text file with the extension \texttt{.R}. To create a new script file, go to \emph{File \textgreater{} New File \textgreater{} R Script}, or use the keyboard shortcut \textbf{CTRL + SHIFT + N}. A new pane will open called the \textbf{source} pane - this is where you will edit your code and save your progress. R Scripts are a key feature of reproducible research with R, given that if they are well-written they can present a complete road map of your statistical analysis and workflow.
+
+\hypertarget{working-dir}{%
+\section{The Working Directory}\label{working-dir}}
+
+Keeping things organized is essential to efficient use of R. For this book, you should have a separate subfolder for your scripts in each chapter. Create a subfolder called \texttt{C:/Users/YOU/Documents/R-Book/Chapter1} and save your \texttt{Ch1.R} script there.
+
+Part of keeping your work organized in R is making sure you know where R is looking for your files. One way to facilitate this is to use a \textbf{working directory}. This is the location (i.e., folder) on your computer that your current R session will ``talk to'' by default. R will read files from and write files to the working directory by default. Because you'll likely be visiting it often, it should probably be somewhere that is easy to remember and not too deeply buried in your computer's file system.
+
+To set the working directory to \texttt{C:/Users/YOU/Documents/R-Book/Chapter1}, you have three options:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Go to Session \textgreater{} Set Working Directory \textgreater{} Source File Location}. This will set the working directory to the location of the file that is currently open in your source pane.
+\item
+  \textbf{Go to Session \textgreater{} Set Working Directory \textgreater{} Choose Directory}. This will open an interactive file selection window to allow you to navigate to the desired directory.
+\item
+  \textbf{Use code}. In the console, you can type \texttt{setwd("C:/Users/YOU/Documents/R-Book/Chapter1")}. If at any point you want to know where your current working directory is set to, you can either look at the top of the console pane, which shows the full path or by running \texttt{getwd()} in the console. Note the use of \texttt{/} rather than \texttt{\textbackslash{}} for file paths in R. If you are using a Mac, omit \texttt{C:} from your directory name.
+\end{enumerate}
+
+\textbf{The main benefits of using a working directory are}:
+
+\begin{itemize}
+\tightlist
+\item
+  Files are read from and written to a consistent and predictable place every time
+\item
+  Everything for your analysis is organized into one place on your computer
+\item
+  You don't have to continuously type file paths to your work. If \texttt{file.txt} is a file in your current working directory, you can reference it your R session using \texttt{"file.txt"} rather than with \texttt{"C:/Users/YOU/Documents/R-Book/Chapter1/file.txt"} each time.
+\end{itemize}
+
+Note that while it is generally good practice to keep your data in the working directory, this is not recommended for this book. You will be using the same data files in multiple chapters, so it will help if they are all stored in one location. More details on this later (Section \ref{read}).
+
+\hypertarget{r-object-types}{%
+\section{R Object Types}\label{r-object-types}}
+
+R has a variety of object types that you will need to become familiar with.
+
+\hypertarget{functions}{%
+\subsection{Functions}\label{functions}}
+
+Much of your work in R will involve functions. A function is called using the syntax:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fun}\NormalTok{(}\DataTypeTok{arg1 =}\NormalTok{ value1, }\DataTypeTok{arg2 =}\NormalTok{ value2)}
+\end{Highlighting}
+\end{Shaded}
+
+Here, \texttt{fun()} is the \textbf{function name} and \texttt{arg1} and \texttt{arg2} are called \textbf{arguments}. Functions take input in the form of the arguments, do some task with them, then return some output. The parentheses are a sure sign that \texttt{fun()} is a function.
+
+The syntax above passes the function two arguments by name: all functions have arguments, all arguments have names, and there is always a default order to the arguments. If you memorize the argument order of functions you use frequently, you don't have to specify the argument names:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{fun}\NormalTok{(value1, value2)}
+\end{Highlighting}
+\end{Shaded}
+
+would give the same result as the command above in which the argument names were specified.
+
+Here's a real example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{print}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ z)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+The function is \texttt{print()}, the argument is \texttt{x}, and the value you have supplied the argument is the object \texttt{z}. The task that \texttt{print()} does is to print the value of \texttt{z} to the console.
+
+R has a ton of built-in documentation to help you learn how to use a function. Take a look at the help file for the \texttt{mean()} function. Run \texttt{?mean} in the console: a window on the right-hand side of the R Studio interface should open. The help file tells you what goes into a function and what comes out. For more complex functions it also tells you what all of the options (i.e., arguments) can do. Help files can be a bit intimidating to interpret at first, but they are all organized the same and once you learn their layout you will know where to go to find the information you're looking for.
+
+\hypertarget{vectors}{%
+\subsection{Vectors}\label{vectors}}
+
+Vectors are one of the most common data structures. A vector is a set of numbers going in only one dimension. Each position in a vector is called an \textbf{element}, and the number of elements is called the \textbf{length} of the vector. Here are some ways to make some vectors with different elements, all of length five:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# this is a comment. R will ignore all text on a line after a #}
+\CommentTok{# the ; means run everything after it on a new line}
+
+\CommentTok{# count up by 1}
+\NormalTok{month =}\StringTok{ }\DecValTok{2}\OperatorTok{:}\DecValTok{6}\NormalTok{; month}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 3 4 5 6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# count up by 2}
+\NormalTok{day =}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DataTypeTok{from =} \DecValTok{1}\NormalTok{, }\DataTypeTok{to =} \DecValTok{9}\NormalTok{, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{); day}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 3 5 7 9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# repeat the same number (repeat 2018 5 times)}
+\NormalTok{year =}\StringTok{ }\KeywordTok{rep}\NormalTok{(}\DecValTok{2018}\NormalTok{, }\DecValTok{5}\NormalTok{); year}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2018 2018 2018 2018 2018
+\end{verbatim}
+
+The \texttt{{[}1{]}} that shows up is an element position, more on this later (see Section \ref{sub}). If you wish to know how many elements are in a vector, use \texttt{length()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(year)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+You can also create a vector ``by-hand'' using the \texttt{c()} function\footnote{The \texttt{c} stands for \textbf{concatenate}, which basically means combine many smaller objects into one larger object}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# a numeric vector}
+\NormalTok{number =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{7}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{); number}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  4  7  8 10 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# a character vector}
+\NormalTok{pond =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"F11"}\NormalTok{, }\StringTok{"S28"}\NormalTok{, }\StringTok{"S30"}\NormalTok{, }\StringTok{"S8"}\NormalTok{, }\StringTok{'S11'}\NormalTok{); pond}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "F11" "S28" "S30" "S8"  "S11"
+\end{verbatim}
+
+Note the difference between the numeric and character vectors. The terms ``numeric'' and ``character''" represent \textbf{data classes}, which specify the type of data the vector is holding:
+
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{numeric vector} stores numbers. You can do math with numeric vectors
+\item
+  A \textbf{character vector} stores what are essentially letters. You can't do math with letters. A character vector is easy to spot because the elements will be wrapped with quotes\footnote{\texttt{"\ "} or \texttt{\textquotesingle{}\ \textquotesingle{}} both work as long as you use the same on the front and end of the element}.
+\end{itemize}
+
+A vector can only hold one data class at a time:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\StringTok{"a"}\NormalTok{); v}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "1" "2" "3" "a"
+\end{verbatim}
+
+Notice how all the elements now have quotes around them. The numbers have been \textbf{coerced} to characters\footnote{The coercion works this way because numbers can be expressed as characters, but a letter cannot be unambiguously expressed as a number.}. If you attempt to calculate the sum of your vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Error in sum(v): invalid 'type' (character) of argument
+\end{verbatim}
+
+you would find that it is impossible in its current form.
+
+\hypertarget{matrices}{%
+\subsection{Matrices}\label{matrices}}
+
+Matrices act just like vectors, but they have two dimensions, i.e., they have both rows and columns. An easy way to make a matrix is by combining vectors you have already made:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# combine vectors by column (each vector will become a column)}
+\NormalTok{m1 =}\StringTok{ }\KeywordTok{cbind}\NormalTok{(month, day, year, number); m1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      month day year number
+## [1,]     2   1 2018      4
+## [2,]     3   3 2018      7
+## [3,]     4   5 2018      8
+## [4,]     5   7 2018     10
+## [5,]     6   9 2018     15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# combine vectors by row (each vector will become a row)}
+\NormalTok{m2 =}\StringTok{ }\KeywordTok{rbind}\NormalTok{(month, day, year, number); m2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        [,1] [,2] [,3] [,4] [,5]
+## month     2    3    4    5    6
+## day       1    3    5    7    9
+## year   2018 2018 2018 2018 2018
+## number    4    7    8   10   15
+\end{verbatim}
+
+Just like vectors, matrices can hold only one data class (note the coercion of numbers to characters):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cbind}\NormalTok{(m1, pond)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      month day year   number pond 
+## [1,] "2"   "1" "2018" "4"    "F11"
+## [2,] "3"   "3" "2018" "7"    "S28"
+## [3,] "4"   "5" "2018" "8"    "S30"
+## [4,] "5"   "7" "2018" "10"   "S8" 
+## [5,] "6"   "9" "2018" "15"   "S11"
+\end{verbatim}
+
+Each vector should have the same length.
+
+\hypertarget{data-frames}{%
+\subsection{Data Frames}\label{data-frames}}
+
+Many data sets you will work with require storing different data classes in different columns, which would rule out the use of a matrix. This is where \textbf{data frames} come in:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1 =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(month, day, year, number, pond); df1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   month day year number pond
+## 1     2   1 2018      4  F11
+## 2     3   3 2018      7  S28
+## 3     4   5 2018      8  S30
+## 4     5   7 2018     10   S8
+## 5     6   9 2018     15  S11
+\end{verbatim}
+
+Notice the lack of quotation marks which indicates that all variables (i.e., columns) are stored as their original data class.
+
+It is important to know what kind of object type you are using, since R treats them differently. For example, some functions can only use a certain object type. The same holds true for data classes (numeric vs.~character). You can quickly determine what kind of object you are dealing with by using the \texttt{class()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(day); }\KeywordTok{class}\NormalTok{(pond); }\KeywordTok{class}\NormalTok{(m1); }\KeywordTok{class}\NormalTok{(df1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "numeric"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "matrix"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "data.frame"
+\end{verbatim}
+
+\hypertarget{factors}{%
+\section{Factors}\label{factors}}
+
+At this point, it is worthwhile to introduce an additional data class: factors. Notice the data class of the \texttt{pond} variable in \texttt{df1}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{class}\NormalTok{(df1}\OperatorTok{$}\NormalTok{pond)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "factor"
+\end{verbatim}
+
+The character vector \texttt{pond} was coerced to a factor when you placed it in the data frame. A vector with a \textbf{factor} class is like a character vector in that you see letters and that you can't do math on it. However, a factor has additional properties: in particular, it is a grouping variable. See what happens when you print the \texttt{pond} variable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1}\OperatorTok{$}\NormalTok{pond}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] F11 S28 S30 S8  S11
+## Levels: F11 S11 S28 S30 S8
+\end{verbatim}
+
+A factor has levels, with each level being a subcategory of the factor. You can see the unique levels of your factor by running:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{levels}\NormalTok{(df1}\OperatorTok{$}\NormalTok{pond)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "F11" "S11" "S28" "S30" "S8"
+\end{verbatim}
+
+Additionally, factor levels have an assigned order (even if the levels are totally nominal), which will become important in Chapter \ref{ch3} when you learn how to fit linear models to groups of data, in which one level is the ``reference'' group that all other groups are compared to (see Section \ref{anova} for more details).
+
+If you run into errors about R expecting character vectors, it may be because they are actually stored as factors. When you make a data frame, you'll often have the option to turn off the automatic factor coercion. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data.frame}\NormalTok{(month, day, year, number, pond, }\DataTypeTok{stringsAsFactors =}\NormalTok{ F)}
+\KeywordTok{read.csv}\NormalTok{(}\StringTok{"streams.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors =}\NormalTok{ F)  }\CommentTok{# see below for details on read.csv}
+\end{Highlighting}
+\end{Shaded}
+
+will result in character vectors remaining that way as opposed to being coerced to factors. This can be preferable if you are doing many string manipulations, as character vectors are often easier to work with than factors.
+
+\hypertarget{vector-math}{%
+\section{Vector Math}\label{vector-math}}
+
+R does vectorized calculations. This means that if supplied with two numeric vectors of equal length and a mathematical operator, R will perform the calculation on each pair of elements. For example, if you wanted to add the two vectors \texttt{day} and \texttt{month}, then you would just run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dm =}\StringTok{ }\NormalTok{day }\OperatorTok{+}\StringTok{ }\NormalTok{month; dm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1]  3  6  9 12 15
+\end{verbatim}
+
+Look at the contents of both \texttt{day} and \texttt{month} again to make sure you see what R did. You typically should ensure that the vectors you are doing math with are of equal lengths.
+
+You could do the same calculation to each element of a vector (e.g., divide each element by 2) with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dm}\OperatorTok{/}\DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.5 3.0 4.5 6.0 7.5
+\end{verbatim}
+
+\hypertarget{sub}{%
+\section{Data Subsets/Queries}\label{sub}}
+
+This is perhaps the most important and versatile skill to know in R. Say you have an object with data in it and you want to use it for analysis, but you don't want the whole data set: just a few rows or just a few columns, or perhaps you need just a single element from a vector. This section is devoted to ways you can extract certain parts of data objects (the terms \textbf{query} and \textbf{subset} are often used interchangeably to describe this task). There are three main methods:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{By Index} -- This method allows you to pull out specific rows/columns by their location in an object. However, you must know exactly where in the object the desired data are. An \textbf{index} is a location of an element in a data object, like the element position or the position of a specific row or column. The syntax for subsetting a vector by index is \texttt{vector{[}element{]}} and for a matrix it is \texttt{matrix{[}row,column{]}}. Here are some examples:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show all of day, then subset the third element}
+\NormalTok{day; day[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1 3 5 7 9
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show all of m1, then subset the cell in row 1 col 4 }
+\NormalTok{m1; m1[}\DecValTok{1}\NormalTok{,}\DecValTok{4}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      month day year number
+## [1,]     2   1 2018      4
+## [2,]     3   3 2018      7
+## [3,]     4   5 2018      8
+## [4,]     5   7 2018     10
+## [5,]     6   9 2018     15
+\end{verbatim}
+
+\begin{verbatim}
+## number 
+##      4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show all of df1, then subset the entire first column}
+\NormalTok{df1; df1[,}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   month day year number pond
+## 1     2   1 2018      4  F11
+## 2     3   3 2018      7  S28
+## 3     4   5 2018      8  S30
+## 4     5   7 2018     10   S8
+## 5     6   9 2018     15  S11
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 2 3 4 5 6
+\end{verbatim}
+
+Note this last line: the \texttt{{[},1{]}} says ``keep all the rows, but take only the first column''.
+
+Here is another example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# show m1, then subset the 1st, 2nd, and 4th rows and every column}
+\NormalTok{m1; m1[}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{),]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      month day year number
+## [1,]     2   1 2018      4
+## [2,]     3   3 2018      7
+## [3,]     4   5 2018      8
+## [4,]     5   7 2018     10
+## [5,]     6   9 2018     15
+\end{verbatim}
+
+\begin{verbatim}
+##      month day year number
+## [1,]     2   1 2018      4
+## [2,]     3   3 2018      7
+## [3,]     5   7 2018     10
+\end{verbatim}
+
+Notice how you can pass a vector of row indices here to exclude the 3\textsuperscript{rd} and 5\textsuperscript{th} rows.
+
+\textbf{2. By name} -- This method allows you to pull out a specific column of data based on what the column name is. Of course, the column must have a name first. The name method uses the \texttt{\$} operator:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1}\OperatorTok{$}\NormalTok{month}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2 3 4 5 6
+\end{verbatim}
+
+You can combine these two methods:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1}\OperatorTok{$}\NormalTok{month[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# or}
+\NormalTok{df1[,}\KeywordTok{c}\NormalTok{(}\StringTok{"year"}\NormalTok{, }\StringTok{"month"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   year month
+## 1 2018     2
+## 2 2018     3
+## 3 2018     4
+## 4 2018     5
+## 5 2018     6
+\end{verbatim}
+
+The \texttt{\$} method is useful because it can be used to add columns to a data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df1}\OperatorTok{$}\NormalTok{dm =}\StringTok{ }\NormalTok{df1}\OperatorTok{$}\NormalTok{day }\OperatorTok{+}\StringTok{ }\NormalTok{df1}\OperatorTok{$}\NormalTok{month; df1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   month day year number pond dm
+## 1     2   1 2018      4  F11  3
+## 2     3   3 2018      7  S28  6
+## 3     4   5 2018      8  S30  9
+## 4     5   7 2018     10   S8 12
+## 5     6   9 2018     15  S11 15
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Logical Subsetting} -- This is perhaps the most flexible method, but requires more explaining. It is described in Section \ref{logsub}.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{exercise-1a}{%
+\section*{Exercise 1A}\label{exercise-1a}}
+\addcontentsline{toc}{section}{Exercise 1A}
+
+Take a break to apply what you've learned so far to enter the data found in Table \ref{tab:ex-1-table-pdf} into R by hand and do some basic data subsets.
+
+\emph{The solutions to this exercise are found at the end of this book (\protect\hyperlink{ex1a-answers}{here}). You are \textbf{strongly recommended} to make a good attempt at completing this exercise on your own and only look at the solutions when you are truly stumped.}
+
+\begin{table}
+
+\caption{\label{tab:ex-1-table-pdf}The table you should enter in to R by hand for Exercise 1A}
+\centering
+\begin{tabular}[t]{l|r|r|r}
+\hline
+Lake & Area & Time & Fish\\
+\hline
+Big & 100 & 1000 & 643\\
+\hline
+Small & 25 & 1200 & 203\\
+\hline
+Square & 45 & 1400 & 109\\
+\hline
+Circle & 30 & 1600 & 15\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a new file in your working directory called \texttt{Ex\_1A.R}.
+\item
+  Enter these data into vectors. Call the vectors whatever you would like. Should you enter the data as vectors by rows, or by columns? (\emph{Hint: remember the properties of vectors}).
+\item
+  Combine your vectors into a data frame. Why should you use a data frame instead of a matrix?
+\item
+  Subset all of the data from Small Lake.
+\item
+  Subset the area for all of the lakes.
+\item
+  Subset the number of fish for Big and Square lakes.
+\item
+  You realize that you sampled 209 fish at Square Lake, not 109. Fix the mistake. There are two ways to do this, can you think of them both? Which do you think is better?
+\item
+  Save your script. Close R and re-open your script to see that it was saved.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{read}{%
+\section{Read External Data Files}\label{read}}
+
+It is rare that you will enter data by hand as you did in Exercise 1A. Often, you have a data set that you wish to analyze or manipulate that is stored in a spreadsheet. R has several ways to read information from data files and in this book, you will be using a common and simple method: reading in \texttt{.csv} files. \texttt{.csv} files are data files that separate columns with commas\footnote{Note that if your computer is configured for a Spanish-speaking country, Microsoft Excel might convert decimals to commas. This can really mess with reading in data - I would suggest changing the language of Excel if you find this to be the case.}. If your data are in a Microsoft Excel spreadsheet, you can save your spreadsheet file as a \texttt{.csv} file (\emph{File \textgreater{} Save As \textgreater{} Save as Type\textgreater{} CSV (Comma Delimited)}). Several dialog boxes will open asking if you are sure you want to save it as a \texttt{.csv} file.
+
+The syntax for reading in a \texttt{.csv} file is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Path/To/FileName.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Make sure your working directory is set to the location of your current file, which should be in the location \texttt{C:/Users/YOU/Documents/R-Book/Chapter\ 1}. According to the \protect\hyperlink{data-sets}{instructions} on acquiring the data, you should have placed all of the data files for this book (downloaded from the \href{}{GitHub repository}) in the location \texttt{C:/Users/YOU/Documents/R-Book/Data}. If you have done this already and your working directory is set to the location of the \texttt{Ch1.R} script, you can simply run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat =}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"../Data/streams.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{../} tells R to look up one directory from the working directory for a folder called \texttt{Data}, then within that, look for a file called \texttt{streams.csv}.
+
+If you do not get an error, congratulations! However, if you get an error that looks like this:
+
+\begin{verbatim}
+## Warning in file(file, "rt"): cannot open file 'streams.csv': No such file
+## or directory
+\end{verbatim}
+
+\begin{verbatim}
+## Error in file(file, "rt"): cannot open the connection
+\end{verbatim}
+
+then fear not. This must be among the most common errors encountered by R users world-wide. It simply means the file you told R to look for doesn't exist where you told R to find it. Here is a trouble-shooting guide to this error:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The exact case and spelling matters, as do the quotes and \texttt{.csv} at the end. Ensure the file name is typed correctly.
+\item
+  Check what files are in the path you are specifying: run \texttt{dir("../Data")}. This will return a vector with the names of the files located in the \texttt{Data} directory (which is one folder up from your working directory). Is the file you told R was there truly in there? Is your working directory set to where you thought it was?
+\end{enumerate}
+
+A simpler method is to put the data file in your working directory, in which case it can be read into R using \texttt{dat\ =\ read.csv("streams.csv")}. This method is not recommended for this book, because you will be using the same data files in multiple chapters, and it will help if they are all located in the same location.
+
+If you did not get any errors, then the data are in the object you named (\texttt{dat}) and that object is a data frame. Do not proceed until you are able to get \texttt{read.csv} to run successfully.
+
+\textbf{A few things to note about reading in \texttt{.csv} files}:
+
+\begin{itemize}
+\tightlist
+\item
+  R will assume the first row are column headers by default.
+\item
+  If there is a space in one of the header cells, a \texttt{"."} will be inserted. For example, the column header \texttt{Total\ Length} would become \texttt{Total.Length}.
+\item
+  R brings in \texttt{.csv} files in as data frames by default.
+\item
+  If a record (i.e., cell) is truly missing and you want R to treat it that way (i.e., as an \texttt{NA}), you have three options:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Hard code an \texttt{NA} into that cell in your \texttt{.csv} file
+  \item
+    Leave that cell completely empty in your \texttt{.csv} file
+  \item
+    Enter in some other character (e.g., \texttt{"."}) alone in all cells that are meant to be coded as \texttt{NA} in R and use the \texttt{na.strings\ =\ "."} argument of \texttt{read.csv()}.
+  \end{itemize}
+\item
+  If at some point you did ``Clear Contents'' in Microsoft Excel to delete rows or columns from your \texttt{.csv} file, these ``deleted'' rows/columns will be read in as all \texttt{NAs}, which can be annoying. To remove this problem, open the \texttt{.csv} file in Excel, then highlight and \textbf{delete} the rows/columns in question and save the file. Read it back into R again using \texttt{read.csv()}.
+\item
+  If even a single character is found in a numeric column in \texttt{FileName.csv}, the \emph{entire column} will be coerced to a character/factor data class after it is read in (i.e., no more math with data on that column until you remove the character). A common error is to have a \texttt{\#VALUE!} record left over from an invalid Excel function result. You must remove all of these occurrences in order to use that column as numeric. Characters include anything other than a number ({[}0-9{]}) and a period when used as a decimal. None of these characters: \texttt{!?{[}{]}\textbackslash{}/@\#\$\%\^{}\&*()\textless{}\textgreater{}\_-+={[}a-z{]};{[}A-Z{]}} should never be found in a column you wish to do math with (e.g., take the mean of that column). \textbf{This is an incredibly common problem!}
+\end{itemize}
+
+\hypertarget{data-summaries}{%
+\section{Explore the Data Set}\label{data-summaries}}
+
+Have a look at the data. You could just run \texttt{dat} to view the contents of the object, but it will show the whole thing, which may be undesirable if the data set is large. To view the first handful of rows, run \texttt{head(dat)} or the last handful of rows with \texttt{tail(dat)}.
+
+You will now use some basic functions to explore the simulated streams data before any analysis. The \texttt{summary()} function is very useful for getting a coarse look at how R has interpreted the data frame:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        state    stream_width        flow       
+##  Alabama  :5   Min.   :17.65   Min.   : 28.75  
+##  Florida  :5   1st Qu.:46.09   1st Qu.: 65.50  
+##  Georgia  :5   Median :61.80   Median : 95.64  
+##  Tennessee:5   Mean   :60.88   Mean   : 91.49  
+##                3rd Qu.:79.34   3rd Qu.:120.55  
+##                Max.   :94.65   Max.   :149.54  
+##                                NA's   :1
+\end{verbatim}
+
+You can see the spread of the numeric data and see the different levels of the factor (\texttt{state}) as well as how many records belong to each level. Note that there is one \texttt{NA} in the variable called \texttt{flow}.
+
+To count the number of elements in a variable (or any vector), remember the \texttt{length()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+Note that R counts missing values as elements as well:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{length}\NormalTok{(dat}\OperatorTok{$}\NormalTok{flow)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+To get the dimensions of an object with more than one dimension (i.e., a data frame or matrix) you can use the \texttt{dim()} function. This returns a vector with two elements: the first number is the number of rows and the second is the number of columns. If you only want one of these, use the \texttt{nrow()} or \texttt{ncol()} functions (but remember, only for objects with more than one dimension; vectors don't have rows or columns!).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{dim}\NormalTok{(dat); }\KeywordTok{nrow}\NormalTok{(dat); }\KeywordTok{ncol}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 20  3
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 20
+\end{verbatim}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+You can extract the names of the variables (i.e., columns) in the data frame using \texttt{colnames()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{colnames}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "state"        "stream_width" "flow"
+\end{verbatim}
+
+Calculate the mean of all the \texttt{stream\_width} records:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 60.8845
+\end{verbatim}
+
+Calculate the mean of all of the \texttt{flow} records:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(dat}\OperatorTok{$}\NormalTok{flow)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] NA
+\end{verbatim}
+
+\texttt{mean()} returned an \texttt{NA} because there is an \texttt{NA} in the data for this variable. The way to tell R to ignore this \texttt{NA} is by including the argument \texttt{na.rm\ =\ TRUE} in the \texttt{mean()} function (separate arguments are always separated by commas). This is a \textbf{logical} argument, meaning that it asks a question. It says ``do you want to remove \texttt{NAs} before calculating the mean?'' \texttt{TRUE} means ``yes'' and \texttt{FALSE} means ``no.'' \texttt{TRUE} and \texttt{FALSE} can be abbreviated as \texttt{T} and \texttt{F}, respectively. Many of R's functions have the \texttt{na.rm} argument (e.g.~\texttt{mean()}, \texttt{sd()}, \texttt{var()}, \texttt{min()}, \texttt{max()}, \texttt{sum()}, etc. - most anything that collapses a vector into one number).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(dat}\OperatorTok{$}\NormalTok{flow, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91.49053
+\end{verbatim}
+
+which is the same as (i.e., the definition of the mean with the \texttt{NA} removed):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{sum}\NormalTok{(dat}\OperatorTok{$}\NormalTok{flow, }\DataTypeTok{na.rm =}\NormalTok{ T)}\OperatorTok{/}\NormalTok{(}\KeywordTok{nrow}\NormalTok{(dat) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 91.49053
+\end{verbatim}
+
+What if you need to apply a function to more than one variable at a time? One of the easiest ways to do this (though as with most things in R, there are many) is by using the \texttt{apply()} function. This function applies the same summary function to individual subsets of a data object at a time then returns the individual summaries all at once:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apply}\NormalTok{(dat[,}\KeywordTok{c}\NormalTok{(}\StringTok{"stream_width"}\NormalTok{, }\StringTok{"flow"}\NormalTok{)], }\DecValTok{2}\NormalTok{, }\DataTypeTok{FUN =}\NormalTok{ var, }\DataTypeTok{na.rm =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## stream_width         flow 
+##     581.1693    1337.3853
+\end{verbatim}
+
+The first argument is the data object to which you want to apply the function. The second argument (the number \texttt{2}) specifies that you want to apply the function to columns, \texttt{1} would tell R to apply it to rows. The \texttt{FUN} argument specifies what function you wish to apply to each of the columns; here you are calculating the variance which takes the \texttt{na.rm\ =\ T} argument. This use of \texttt{apply()} alone is very powerful and can help you get around having to write the dreaded \texttt{for()} loop (introduced in Chapter \ref{ch4}).
+
+There is a whole family of \texttt{-apply()} functions, the base \texttt{apply()} is the most basic but a more sophisticated one is \texttt{tapply()}, which applies a function based on some grouping variable (a factor). Calculate the mean stream width \textbf{separated by state}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{tapply}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width, dat}\OperatorTok{$}\NormalTok{state, mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Alabama   Florida   Georgia Tennessee 
+##    53.664    63.588    54.996    71.290
+\end{verbatim}
+
+The first argument is the variable to which you want to apply the \texttt{mean} function, the second is the grouping variable, and the third is what function you wish to apply. Try to commit this command to memory given this is a pretty common task.
+
+If you want a data frame as output, you can use the \texttt{aggregate} function to do the same thing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{aggregate}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width, }\DataTypeTok{by =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{state =}\NormalTok{ dat}\OperatorTok{$}\NormalTok{state), mean)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       state      x
+## 1   Alabama 53.664
+## 2   Florida 63.588
+## 3   Georgia 54.996
+## 4 Tennessee 71.290
+\end{verbatim}
+
+\hypertarget{logicalboolean-operators}{%
+\section{Logical/Boolean Operators}\label{logicalboolean-operators}}
+
+To be an efficient and capable programmer in any language, you will need to become familiar with how to implement numerical logic, i.e., the Boolean operators. These are very useful because they always return a \texttt{TRUE} or a \texttt{FALSE}, off of which program-based decisions can be made (e.g., whether to operate a given subroutine, whether to keep certain rows, whether to print the output, etc.).
+
+Define a simple object: \texttt{x\ =\ 5} . Note that this will write over what was previously stored in the object \texttt{x}. Suppose you want to ask some questions of the new object \texttt{x} and have the answer printed to the console as a \texttt{TRUE} for ``yes'' and a \texttt{FALSE} for ``no''. Below are the common Boolean operators and their usage in R.
+
+\hypertarget{equality}{%
+\subsubsection*{Equality}\label{equality}}
+\addcontentsline{toc}{subsubsection}{Equality}
+
+To ask if \texttt{x} is exactly equal to 5, you run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{==}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+Note the use of the double \texttt{==} to denote equality as opposed to the single \texttt{=} as used in assignment (e.g., \texttt{x\ =\ 5}) or in argument specification (e.g., \texttt{mean(dat\$flow,\ na.rm\ =\ T)}).
+
+\hypertarget{inequalities}{%
+\subsubsection*{Inequalities}\label{inequalities}}
+\addcontentsline{toc}{subsubsection}{Inequalities}
+
+To ask if \texttt{x} is not equal to 5, you run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{!=}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+The \texttt{!} is the logical \textbf{not} in R, and can be used to flip the direction of any \texttt{T} to a \texttt{F} or \emph{vice versa}.
+
+To ask if \texttt{x} is less than 5, you run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{<}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+To ask if \texttt{x} is less than \emph{or equal to} 5, you run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{<=}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+Greater than works the same way, though with the \texttt{\textgreater{}} symbol replaced.
+
+\hypertarget{in}{%
+\subsubsection*{In}\label{in}}
+\addcontentsline{toc}{subsubsection}{In}
+
+Suppose you want to ask which elements of one vector are also found within another vector:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\NormalTok{x }\OperatorTok{%in%}\StringTok{ }\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# or}
+\NormalTok{y =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\NormalTok{x }\OperatorTok{%in%}\StringTok{ }\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# or}
+\NormalTok{y }\OperatorTok{%in%}\StringTok{ }\NormalTok{x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] FALSE  TRUE FALSE
+\end{verbatim}
+
+\texttt{\%in\%} is a very useful operator in R that is not one of the traditional Boolean operators.
+
+\hypertarget{and}{%
+\subsubsection*{And}\label{and}}
+\addcontentsline{toc}{subsubsection}{And}
+
+Suppose you have two conditions, and you want to know if \textbf{both are met}. For this you would use \textbf{and} by running:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{>}\StringTok{ }\DecValTok{4} \OperatorTok{&}\StringTok{ }\NormalTok{x }\OperatorTok{<}\StringTok{ }\DecValTok{6}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+which asks if \texttt{x} is between 4 and 6.
+
+\hypertarget{or}{%
+\subsubsection*{Or}\label{or}}
+\addcontentsline{toc}{subsubsection}{Or}
+
+Suppose you have two conditions, and you want to know if \textbf{either are met}. For this you would use \textbf{or} by running:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OperatorTok{<=}\StringTok{ }\DecValTok{5} \OperatorTok{|}\StringTok{ }\NormalTok{x }\OperatorTok{>}\StringTok{ }\DecValTok{5}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+which asks if \texttt{x} is less than or equal to 5 \textbf{or} greater than 5 - you would be hard-pressed to find a real number that did not meet these conditions!
+
+\hypertarget{logsub}{%
+\section{Logical Subsetting}\label{logsub}}
+
+A critical use of logical/Boolean operators is in the subsetting of data objects. You can use a logical vector (i.e., one made of only \texttt{TRUE} and \texttt{FALSE} elements) to tell R to extract only those elements corresponding to the \texttt{TRUE} records. For example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# here's logical vector: TRUE everywhere condition met}
+\NormalTok{dat}\OperatorTok{$}\NormalTok{stream_width }\OperatorTok{>}\StringTok{ }\DecValTok{60}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1]  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE
+## [12] FALSE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# insert it to see only the flows for the TRUE elmements}
+\NormalTok{dat}\OperatorTok{$}\NormalTok{flow[dat}\OperatorTok{$}\NormalTok{stream_width }\OperatorTok{>}\StringTok{ }\DecValTok{60}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 120.48 123.78  95.64  95.82 120.06 135.63 120.61 111.34 149.54 131.22
+\end{verbatim}
+
+gives all of the \texttt{flow} values for which \texttt{stream\_width} is greater than 60.
+
+To extract all of the data from Alabama, you would run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat[dat}\OperatorTok{$}\NormalTok{state }\OperatorTok{==}\StringTok{ "Alabama"}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     state stream_width   flow
+## 1 Alabama        81.68 120.48
+## 2 Alabama        57.76  85.90
+## 3 Alabama        48.32  73.38
+## 4 Alabama        31.63  46.55
+## 5 Alabama        48.93  80.91
+\end{verbatim}
+
+To exclude all of the data from Alabama, you would run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat[dat}\OperatorTok{$}\NormalTok{state }\OperatorTok{!=}\StringTok{ "Alabama"}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+You will be frequently revisiting this skill throughout the workshop.
+
+\hypertarget{if-else-and-ifelse}{%
+\section{\texorpdfstring{\texttt{if()}, \texttt{else}, and \texttt{ifelse()}}{if(), else, and ifelse()}}\label{if-else-and-ifelse}}
+
+You can tell R to do something if the result of a question is \texttt{TRUE}. This is a typical if-then statement:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (x }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{) }\KeywordTok{print}\NormalTok{(}\StringTok{"x is equal to 5"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "x is equal to 5"
+\end{verbatim}
+
+This says ``if \texttt{x} equals 5, then print the phrase `x is equal to 5' to the console''. If the logical returns a \texttt{FALSE}, then this command does nothing. To see this, change the \texttt{==} to a \texttt{!=} and re-run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (x }\OperatorTok{!=}\StringTok{ }\DecValTok{5}\NormalTok{) }\KeywordTok{print}\NormalTok{(}\StringTok{"x is equal to 5"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Notice that because \texttt{x} does equal 5, running this line has no effect.
+
+You can tell R to do multiple things if the logical is \texttt{TRUE} by using curly braces:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (x }\OperatorTok{==}\StringTok{ }\DecValTok{5}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"x is equal to 5"}\NormalTok{)}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"you dummy, x is supposed to be 6"}\NormalTok{)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "x is equal to 5"
+## [1] "you dummy, x is supposed to be 6"
+\end{verbatim}
+
+You can always use curly braces to extend code across multiple lines whereas it may have been intended to go on one line.
+
+If you want R to do something if the logical is \texttt{FALSE}, you would use the \texttt{else} command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (x }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{) }\KeywordTok{print}\NormalTok{(}\StringTok{"x is greater than 5"}\NormalTok{) }\ControlFlowTok{else} \KeywordTok{print}\NormalTok{(}\StringTok{"x is not greater than 5"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "x is not greater than 5"
+\end{verbatim}
+
+Or extend this same thing to multiple lines:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (x }\OperatorTok{>}\StringTok{ }\DecValTok{5}\NormalTok{) \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"x is greater than 5"}\NormalTok{)}
+\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}
+  \KeywordTok{print}\NormalTok{(}\StringTok{"x is not greater than 5"}\NormalTok{)}
+\NormalTok{\} }
+\end{Highlighting}
+\end{Shaded}
+
+The \texttt{if()} function is useful, but it can only respond to one question at a time. If you supply it with a vector of length greater than 1, it will give a warning:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# vector from -5 to 5, excluding zero}
+\NormalTok{xs =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\OperatorTok{:-}\DecValTok{1}\NormalTok{, }\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{)}
+
+\CommentTok{# attempt a logical decision}
+\ControlFlowTok{if}\NormalTok{ (xs }\OperatorTok{<}\StringTok{ }\DecValTok{0}\NormalTok{) }\KeywordTok{print}\NormalTok{(}\StringTok{"negative"}\NormalTok{) }\ControlFlowTok{else} \KeywordTok{print}\NormalTok{(}\StringTok{"positive"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in if (xs < 0) print("negative") else print("positive"): the
+## condition has length > 1 and only the first element will be used
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "negative"
+\end{verbatim}
+
+Warnings are different than errors in that something still happens, but it tells you that it might not be what you wanted, whereas an error stops R altogether. In short, this warning is telling you that you passed \texttt{if()} a logical vector with more than 1 element, and that it can only use one element so it's picking the first one. Because the first element of \texttt{xs} is -5, \texttt{xs\ \textless{}\ 0} evaluated to \texttt{TRUE}, and you got a \texttt{"negative"} printed along with the warning.
+
+To respond to multiple questions at once, you must use \texttt{ifelse()}. This function is similar, but it combines the \texttt{if()} and \texttt{else} syntax into one useful function function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ifelse}\NormalTok{(xs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"positive"}\NormalTok{, }\StringTok{"negative"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "negative" "negative" "negative" "negative" "negative" "positive"
+##  [7] "positive" "positive" "positive" "positive"
+\end{verbatim}
+
+The syntax is \texttt{ifelse(condition,\ do\_if\_TRUE,\ do\_if\_FALSE)}. You can \texttt{cbind()} the output with \texttt{xs} to verify it worked:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cbind}\NormalTok{(}
+\NormalTok{  xs,}
+  \KeywordTok{ifelse}\NormalTok{(xs }\OperatorTok{>}\StringTok{ }\DecValTok{0}\NormalTok{, }\StringTok{"positive"}\NormalTok{, }\StringTok{"negative"}\NormalTok{)}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       xs             
+##  [1,] "-5" "negative"
+##  [2,] "-4" "negative"
+##  [3,] "-3" "negative"
+##  [4,] "-2" "negative"
+##  [5,] "-1" "negative"
+##  [6,] "1"  "positive"
+##  [7,] "2"  "positive"
+##  [8,] "3"  "positive"
+##  [9,] "4"  "positive"
+## [10,] "5"  "positive"
+\end{verbatim}
+
+Use \texttt{ifelse()} to create a new variable in \texttt{dat} that indicates whether a stream is big or small depending on whether \texttt{stream\_width} is greater or less than 50:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat}\OperatorTok{$}\NormalTok{size_cat =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width }\OperatorTok{>}\StringTok{ }\DecValTok{50}\NormalTok{, }\StringTok{"big"}\NormalTok{, }\StringTok{"small"}\NormalTok{); }\KeywordTok{head}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     state stream_width   flow size_cat
+## 1 Alabama        81.68 120.48      big
+## 2 Alabama        57.76  85.90      big
+## 3 Alabama        48.32  73.38    small
+## 4 Alabama        31.63  46.55    small
+## 5 Alabama        48.93  80.91    small
+## 6 Georgia        39.42  57.63    small
+\end{verbatim}
+
+This says ``make a new variable in the data frame \texttt{dat} called \texttt{size\_cat} and assign each row a `big' if \texttt{stream\_width} is greater than 50 and a `small' if less than 50''.
+
+One neat thing about \texttt{ifelse()} is that you can nest multiple statements inside another\footnote{You can nest \textbf{ALL} R functions, by the way.}. What if you wanted three categories: `small', `medium', and `large'?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dat}\OperatorTok{$}\NormalTok{size_cat_fine =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width }\OperatorTok{<=}\StringTok{ }\DecValTok{40}\NormalTok{, }\StringTok{"small"}\NormalTok{,}
+                           \KeywordTok{ifelse}\NormalTok{(dat}\OperatorTok{$}\NormalTok{stream_width }\OperatorTok{>}\StringTok{ }\DecValTok{40} \OperatorTok{&}\StringTok{ }\NormalTok{dat}\OperatorTok{$}\NormalTok{stream_width }\OperatorTok{<=}\StringTok{ }\DecValTok{70}\NormalTok{, }\StringTok{"medium"}\NormalTok{, }\StringTok{"big"}\NormalTok{)); }\KeywordTok{head}\NormalTok{(dat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     state stream_width   flow size_cat size_cat_fine
+## 1 Alabama        81.68 120.48      big           big
+## 2 Alabama        57.76  85.90      big        medium
+## 3 Alabama        48.32  73.38    small        medium
+## 4 Alabama        31.63  46.55    small         small
+## 5 Alabama        48.93  80.91    small        medium
+## 6 Georgia        39.42  57.63    small         small
+\end{verbatim}
+
+If the first condition is \texttt{TRUE}, then it will give that row a ``small''. If not, it will start another \texttt{ifelse()} to ask if the \texttt{stream\_width} is greater than 40 \emph{and} less than or equal to 70. If so, it will give it a ``medium'', if not it will get a ``big''. Not all function nesting examples are this complex, but this is a neat example. Without \texttt{ifelse()}, you would have to use as many \texttt{if()} statements as there are elements in \texttt{dat\$stream\_width}.
+
+\hypertarget{writing-output-files}{%
+\section{Writing Output Files}\label{writing-output-files}}
+
+\hypertarget{csv-files}{%
+\subsection{\texorpdfstring{\texttt{.csv} Files}{.csv Files}}\label{csv-files}}
+
+Now that you have made some new variables in your data frame, you may want to save this work in the form of a new \texttt{.csv} file. To do this, you can use the \texttt{write.csv} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{write.csv}\NormalTok{(dat, }\StringTok{"updated_streams.csv"}\NormalTok{, }\DataTypeTok{row.names =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+The first argument is the data frame (or matrix) to write, the second is what you want to call it (don't forget the \texttt{.csv}!), and \texttt{row.names\ =\ F} tells R to not include the row names (because they are just numbers in this case). R puts the file in your working directory unless you tell it otherwise. To put it somewhere else, type in the path with the new file name at the end (e.g., \texttt{C:/Users/YOU/Documents/R-Book/Data/updated\_streams.csv}.
+
+\hypertarget{saving-r-objects}{%
+\subsection{Saving R Objects}\label{saving-r-objects}}
+
+If all you care about is the data frame \texttt{dat} as interpreted by R (not a share-able file like the \texttt{.csv} method), then you can save the object \texttt{dat} (in its current state) then load it in to a future R session. You can save the new data frame using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{save}\NormalTok{(dat, }\DataTypeTok{file =} \StringTok{"updated_streams"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Then try removing the \texttt{dat} object from your current session (\texttt{rm(dat)}) and loading it back in using:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rm}\NormalTok{(dat); }\KeywordTok{head}\NormalTok{(dat)  }\CommentTok{# should give error}
+\KeywordTok{load}\NormalTok{(}\DataTypeTok{file =} \StringTok{"updated_streams"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(dat) }\CommentTok{# should show first 6 rows}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{user-funcs}{%
+\section{User-Defined Functions}\label{user-funcs}}
+
+Sometimes you may want R to carry out a specific task, but there is no built-in function to do it. In these cases, you can write your own functions. Function writing makes R incredibly flexible, though you will only get a small taste of this topic here. You will see more examples in later Chapters, particularly in Chapter \ref{ch4}.
+
+First, you must think of a name for your function (e.g., \texttt{myfun}). Then, you specify that you want the object \texttt{myfun()} to be a function by using using the \texttt{function()} function. Then, in parentheses, you specify any arguments that you want to use within the function to carry out the specific task. Open and closed curly braces specify the start and end of your function body, i.e., the code that specifies how it uses the arguments to do its job.
+
+Here's the general syntax for specifying your own function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myfun =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(arg1) \{}
+  \CommentTok{# function body goes here}
+    \CommentTok{# use arg1 to do something}
+  
+  \CommentTok{# return something as last step}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+As an example, write a general function to take any number \texttt{x} to any power \texttt{y}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{power =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y)\{}
+\NormalTok{  x}\OperatorTok{^}\NormalTok{y}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+After typing and running the function code (\texttt{power()} is an object that must be assigned), try using it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{power}\NormalTok{(}\DataTypeTok{x =} \DecValTok{5}\NormalTok{, }\DataTypeTok{y =} \DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 125
+\end{verbatim}
+
+Remember, you can nest or embed functions:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{power}\NormalTok{(}\KeywordTok{power}\NormalTok{(}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{),}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 625
+\end{verbatim}
+
+This is the equivalent of \((5^2)^2\).
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\hypertarget{ex1b}{%
+\section*{Exercise 1B}\label{ex1b}}
+\addcontentsline{toc}{section}{Exercise 1B}
+
+In this exercise, you will be using what you learned in Chapter 1 to summarize data from a hypothetical pond experiment.
+
+Pretend that you added nutrients to mesocosoms and counted the densities of four different zooplankton taxa. In this experiment, there were two ponds, two treatments per pond, and five replicates of each treatment. The data are located in the data file \texttt{ponds.csv} (see the \protect\hyperlink{data-sets}{instructions} on acquiring and organizing the data files for this book. There is one error in the data set. After you download the data and place it in the appropriate directory, make sure you open this file and fix it \emph{before} you bring it into R. Refer back to the information about reading in data (Section \ref{read}) to make sure you find the error.
+
+Create a new R script in your working directory for this chapter called \texttt{Ex1B.R} and use that script to complete this exercise.
+
+\emph{The solutions to this exercise are found at the end of this book (\protect\hyperlink{ex1b-answers}{here}). You are \textbf{strongly recommended} to make a good attempt at completing this exercise on your own and only look at the solutions when you are truly stumped.}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Read in the data to R and assign it to an object.
+\item
+  Calculate some basic summary statistics of your data using the \texttt{summary()} function.
+\item
+  Calculate the mean chlorophyll \emph{a} for each pond (\emph{Hint: pond is a grouping variable})
+\item
+  Calculate the mean number of \emph{Chaoborus} for each treatment in each pond using \texttt{tapply()}. (\emph{Hint: You can group by two variables with:} \texttt{tapply(dat\$var,\ list(dat\$grp1,\ dat\$grp2),\ fun)}.
+\item
+  Use the more general \texttt{apply()} function to calculate the variance for each zooplankton taxa found only in pond S-28.
+\item
+  Create a new variable called \texttt{prod} in the data frame that represents the quantity of chlorophyll \emph{a} in each replicate. If the chlorophyll \emph{a} in the replicate is greater than 30 give it a ``high'', otherwise give it a ``low''. (\emph{Hint: are you asking R to respond to one question or multiple questions? How should this change the strategy you use?})
+\end{enumerate}
+
+\hypertarget{exercise-1b-bonus}{%
+\subsection*{Exercise 1B Bonus}\label{exercise-1b-bonus}}
+\addcontentsline{toc}{subsection}{Exercise 1B Bonus}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use \texttt{?table} to figure out how you can use \texttt{table()} to count how many observations of high and low there were in each treatment (\emph{Hint: \texttt{table} will have only two arguments.}).
+\item
+  Create a new function called \texttt{product()} that multiplies any two numbers you specify.
+\item
+  Modify your function to print a message to the console and return the value \texttt{if()} it meets a condition and to print another message and not return the value if it doesn't.
+\end{enumerate}
+
+\bibliography{book.bib,packages.bib}
+
+
+\end{document}

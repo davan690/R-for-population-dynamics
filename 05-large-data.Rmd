@@ -327,7 +327,7 @@ Note that you get the same result, only the output from `tapply()` is a vector, 
 
 One disadvantage of the `summarize()` function, however, is that it can only be used to apply functions that give one number as output (e.g., `mean()`, `max()`, `sd()`, `length()`, etc.). These are called **aggregate** functions: they take a bunch of numbers and aggregate them into one number. `tapply()` does not have this constraint. Illustrate this by trying to use the `range()` function (which combines the minimum and maximum values of some vector into another vector of length 2). 
 
-```{r, eval = T, error = T}
+```{r, eval = F, error = T}
 # with summarise
 dat %>% 
   ungroup %>%
