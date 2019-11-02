@@ -1,8 +1,8 @@
-book_filename: "au-r-workshop"
+book_filename: "A beginners guide to population dynamics"
 language:
   ui:
     chapter_name: "Chapter "
 delete_merged_file: true
 output_dir: "docs"
-rmd_files: ["index.Rmd","01-intro-to-R.Rmd", "02-plotting-basics.Rmd", "03-basic-statistics.Rmd", "04-simulation.Rmd", "05-large-data.Rmd", "06-spatial-analysis.Rmd", "07-exercise-solutions.Rmd"]
+rmd_files: ["index.Rmd", "04-simulation.Rmd", "05-calving-interval-simulation.Rmd", "06-matrix-pop-model.Rmd", "07-sim-tests.Rmd"]
 

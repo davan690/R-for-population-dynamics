@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction to R for Natural Resource Scientists</title>
+  <title>Introduction to R for Population dynamics</title>
   <meta name="description" content="This is a first course in R programming for natural resource scientists. It was developed and has been primarily instructed at Auburn University." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction to R for Natural Resource Scientists" />
+  <meta property="og:title" content="Introduction to R for Population dynamics" />
   <meta property="og:type" content="book" />
   
   
@@ -16,12 +16,12 @@
   <meta name="github-repo" content="bstaton1/au-r-workshop" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction to R for Natural Resource Scientists" />
+  <meta name="twitter:title" content="Introduction to R for Population dynamics" />
   
   <meta name="twitter:description" content="This is a first course in R programming for natural resource scientists. It was developed and has been primarily instructed at Auburn University." />
   
 
-<meta name="author" content="Ben Staton" />
+<meta name="author" content="Anthony Davidson" />
 
 
 
@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="ch1.html"/>
+<link rel="next" href="ch4.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,22 +49,6 @@
 
 
 
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
-<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-1.3.1/leaflet.js"></script>
-<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
-<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
-<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
-<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
-<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
-<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
-<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.css" rel="stylesheet" />
-<link href="libs/leaflet-markercluster-1.0.5/MarkerCluster.Default.css" rel="stylesheet" />
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.js"></script>
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.freezable.js"></script>
-<script src="libs/leaflet-markercluster-1.0.5/leaflet.markercluster.layersupport.js"></script>
 
 
 <style type="text/css">
@@ -150,119 +134,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Overview</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-is-covered"><i class="fa fa-check"></i>What is Covered?</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#comp-prep"><i class="fa fa-check"></i>Prepare Your Computer</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#external-resources"><i class="fa fa-check"></i><b>0.1</b> External Resources</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#exercises"><i class="fa fa-check"></i>Exercises</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#notation"><i class="fa fa-check"></i>Text Conventions</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#keyboard-shortcuts"><i class="fa fa-check"></i>Keyboard Shortcuts</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#development-of-this-book"><i class="fa fa-check"></i>Development of this Book</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-author"><i class="fa fa-check"></i>About the Author</a></li>
-</ul></li>
-<li class="chapter" data-level="1" data-path="ch1.html"><a href="ch1.html"><i class="fa fa-check"></i><b>1</b> Introduction to the R Environment</a><ul>
-<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#chapter-overview"><i class="fa fa-check"></i>Chapter Overview</a></li>
-<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#before-you-begin"><i class="fa fa-check"></i>Before You Begin</a></li>
-<li class="chapter" data-level="1.1" data-path="ch1.html"><a href="ch1.html#the-r-studio-interface"><i class="fa fa-check"></i><b>1.1</b> The R Studio Interface</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="ch1.html"><a href="ch1.html#write-some-simple-code"><i class="fa fa-check"></i><b>1.1.1</b> Write Some Simple Code</a></li>
-</ul></li>
-<li class="chapter" data-level="1.2" data-path="ch1.html"><a href="ch1.html#scripts"><i class="fa fa-check"></i><b>1.2</b> Saving Your Code: Scripts</a></li>
-<li class="chapter" data-level="1.3" data-path="ch1.html"><a href="ch1.html#working-dir"><i class="fa fa-check"></i><b>1.3</b> The Working Directory</a></li>
-<li class="chapter" data-level="1.4" data-path="ch1.html"><a href="ch1.html#r-object-types"><i class="fa fa-check"></i><b>1.4</b> R Object Types</a><ul>
-<li class="chapter" data-level="1.4.1" data-path="ch1.html"><a href="ch1.html#functions"><i class="fa fa-check"></i><b>1.4.1</b> Functions</a></li>
-<li class="chapter" data-level="1.4.2" data-path="ch1.html"><a href="ch1.html#vectors"><i class="fa fa-check"></i><b>1.4.2</b> Vectors</a></li>
-<li class="chapter" data-level="1.4.3" data-path="ch1.html"><a href="ch1.html#matrices"><i class="fa fa-check"></i><b>1.4.3</b> Matrices</a></li>
-<li class="chapter" data-level="1.4.4" data-path="ch1.html"><a href="ch1.html#data-frames"><i class="fa fa-check"></i><b>1.4.4</b> Data Frames</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="ch1.html"><a href="ch1.html#factors"><i class="fa fa-check"></i><b>1.5</b> Factors</a></li>
-<li class="chapter" data-level="1.6" data-path="ch1.html"><a href="ch1.html#vector-math"><i class="fa fa-check"></i><b>1.6</b> Vector Math</a></li>
-<li class="chapter" data-level="1.7" data-path="ch1.html"><a href="ch1.html#sub"><i class="fa fa-check"></i><b>1.7</b> Data Subsets/Queries</a></li>
-<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#exercise-1a"><i class="fa fa-check"></i>Exercise 1A</a></li>
-<li class="chapter" data-level="1.8" data-path="ch1.html"><a href="ch1.html#read"><i class="fa fa-check"></i><b>1.8</b> Read External Data Files</a></li>
-<li class="chapter" data-level="1.9" data-path="ch1.html"><a href="ch1.html#data-summaries"><i class="fa fa-check"></i><b>1.9</b> Explore the Data Set</a></li>
-<li class="chapter" data-level="1.10" data-path="ch1.html"><a href="ch1.html#logicalboolean-operators"><i class="fa fa-check"></i><b>1.10</b> Logical/Boolean Operators</a></li>
-<li class="chapter" data-level="1.11" data-path="ch1.html"><a href="ch1.html#logsub"><i class="fa fa-check"></i><b>1.11</b> Logical Subsetting</a></li>
-<li class="chapter" data-level="1.12" data-path="ch1.html"><a href="ch1.html#if-else-and-ifelse"><i class="fa fa-check"></i><b>1.12</b> <code>if()</code>, <code>else</code>, and <code>ifelse()</code></a></li>
-<li class="chapter" data-level="1.13" data-path="ch1.html"><a href="ch1.html#writing-output-files"><i class="fa fa-check"></i><b>1.13</b> Writing Output Files</a><ul>
-<li class="chapter" data-level="1.13.1" data-path="ch1.html"><a href="ch1.html#csv-files"><i class="fa fa-check"></i><b>1.13.1</b> <code>.csv</code> Files</a></li>
-<li class="chapter" data-level="1.13.2" data-path="ch1.html"><a href="ch1.html#saving-r-objects"><i class="fa fa-check"></i><b>1.13.2</b> Saving R Objects</a></li>
-</ul></li>
-<li class="chapter" data-level="1.14" data-path="ch1.html"><a href="ch1.html#user-funcs"><i class="fa fa-check"></i><b>1.14</b> User-Defined Functions</a></li>
-<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#ex1b"><i class="fa fa-check"></i>Exercise 1B</a><ul>
-<li class="chapter" data-level="" data-path="ch1.html"><a href="ch1.html#exercise-1b-bonus"><i class="fa fa-check"></i>Exercise 1B Bonus</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="ch2.html"><a href="ch2.html"><i class="fa fa-check"></i><b>2</b> Base R Plotting Basics</a><ul>
-<li class="chapter" data-level="" data-path="ch2.html"><a href="ch2.html#chapter-overview-1"><i class="fa fa-check"></i>Chapter Overview</a></li>
-<li class="chapter" data-level="" data-path="ch2.html"><a href="ch2.html#before-you-begin-1"><i class="fa fa-check"></i>Before You Begin</a></li>
-<li class="chapter" data-level="2.1" data-path="ch2.html"><a href="ch2.html#r-plotting-lingo"><i class="fa fa-check"></i><b>2.1</b> R Plotting Lingo</a></li>
-<li class="chapter" data-level="2.2" data-path="ch2.html"><a href="ch2.html#lower-level-plotting-functions"><i class="fa fa-check"></i><b>2.2</b> Lower Level Plotting Functions</a></li>
-<li class="chapter" data-level="2.3" data-path="ch2.html"><a href="ch2.html#other-high-level-plotting-functions"><i class="fa fa-check"></i><b>2.3</b> Other High-Level Plotting Functions</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="ch2.html"><a href="ch2.html#the-bar-graph"><i class="fa fa-check"></i><b>2.3.1</b> The Bar Graph</a></li>
-</ul></li>
-<li class="chapter" data-level="2.4" data-path="ch2.html"><a href="ch2.html#box-whisker"><i class="fa fa-check"></i><b>2.4</b> Box-and-Whisker Plots</a></li>
-<li class="chapter" data-level="2.5" data-path="ch2.html"><a href="ch2.html#histograms"><i class="fa fa-check"></i><b>2.5</b> Histograms</a></li>
-<li class="chapter" data-level="2.6" data-path="ch2.html"><a href="ch2.html#the-par-function"><i class="fa fa-check"></i><b>2.6</b> The <code>par()</code> Function</a></li>
-<li class="chapter" data-level="2.7" data-path="ch2.html"><a href="ch2.html#new-temporary-devices"><i class="fa fa-check"></i><b>2.7</b> New Temporary Devices</a></li>
-<li class="chapter" data-level="2.8" data-path="ch2.html"><a href="ch2.html#multi-panel-plots"><i class="fa fa-check"></i><b>2.8</b> Multi-panel Plots</a></li>
-<li class="chapter" data-level="2.9" data-path="ch2.html"><a href="ch2.html#legends"><i class="fa fa-check"></i><b>2.9</b> Legends</a></li>
-<li class="chapter" data-level="2.10" data-path="ch2.html"><a href="ch2.html#exporting-plots"><i class="fa fa-check"></i><b>2.10</b> Exporting Plots</a><ul>
-<li class="chapter" data-level="2.10.1" data-path="ch2.html"><a href="ch2.html#click-save"><i class="fa fa-check"></i><b>2.10.1</b> Click Save</a></li>
-<li class="chapter" data-level="2.10.2" data-path="ch2.html"><a href="ch2.html#file-devices"><i class="fa fa-check"></i><b>2.10.2</b> Use a function to place plot in a new file</a></li>
-</ul></li>
-<li class="chapter" data-level="2.11" data-path="ch2.html"><a href="ch2.html#error-bars"><i class="fa fa-check"></i><b>2.11</b> Bonus Topic: Error Bars</a></li>
-<li class="chapter" data-level="" data-path="ch2.html"><a href="ch2.html#ex2"><i class="fa fa-check"></i>Exercise 2</a><ul>
-<li class="chapter" data-level="" data-path="ch2.html"><a href="ch2.html#exercise-2-bonus"><i class="fa fa-check"></i>EXERCISE 2 BONUS</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>3</b> Basic Statistics</a><ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#chapter-overview-2"><i class="fa fa-check"></i>Chapter Overview</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#before-you-begin-2"><i class="fa fa-check"></i>Before You Begin</a></li>
-<li class="chapter" data-level="3.1" data-path="ch3.html"><a href="ch3.html#lm"><i class="fa fa-check"></i><b>3.1</b> The General Linear Model</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="ch3.html"><a href="ch3.html#regression"><i class="fa fa-check"></i><b>3.1.1</b> Simple Linear Regression</a></li>
-<li class="chapter" data-level="3.1.2" data-path="ch3.html"><a href="ch3.html#anova"><i class="fa fa-check"></i><b>3.1.2</b> ANOVA: Categorical predictors</a></li>
-<li class="chapter" data-level="3.1.3" data-path="ch3.html"><a href="ch3.html#ancova-continuous-and-categorical-predictors"><i class="fa fa-check"></i><b>3.1.3</b> ANCOVA: Continuous and categorical predictors</a></li>
-<li class="chapter" data-level="3.1.4" data-path="ch3.html"><a href="ch3.html#interactions"><i class="fa fa-check"></i><b>3.1.4</b> Interactions</a></li>
-<li class="chapter" data-level="3.1.5" data-path="ch3.html"><a href="ch3.html#aic-model-selection"><i class="fa fa-check"></i><b>3.1.5</b> AIC Model Selection</a></li>
-</ul></li>
-<li class="chapter" data-level="3.2" data-path="ch3.html"><a href="ch3.html#glms"><i class="fa fa-check"></i><b>3.2</b> The Generalized Linear Model</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="ch3.html"><a href="ch3.html#logis-regression"><i class="fa fa-check"></i><b>3.2.1</b> Logistic Regression</a></li>
-<li class="chapter" data-level="3.2.2" data-path="ch3.html"><a href="ch3.html#aic-model-selection-1"><i class="fa fa-check"></i><b>3.2.2</b> AIC Model Selection</a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="ch3.html"><a href="ch3.html#dists"><i class="fa fa-check"></i><b>3.3</b> Probability Distributions</a></li>
-<li class="chapter" data-level="3.4" data-path="ch3.html"><a href="ch3.html#nls"><i class="fa fa-check"></i><b>3.4</b> Bonus Topic: Non-linear Regression</a></li>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#exercise-3"><i class="fa fa-check"></i>Exercise 3</a><ul>
-<li class="chapter" data-level="" data-path="ch3.html"><a href="ch3.html#exercise-3-bonus"><i class="fa fa-check"></i>Exercise 3 Bonus</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>4</b> Monte Carlo Methods</a><ul>
-<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#chapter-overview-3"><i class="fa fa-check"></i>Chapter Overview</a></li>
-<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#before-you-begin-3"><i class="fa fa-check"></i>Before You Begin</a></li>
+<li class="chapter" data-level="1" data-path="ch4.html"><a href="ch4.html"><i class="fa fa-check"></i><b>1</b> Monte Carlo Methods</a><ul>
+<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#chapter-overview"><i class="fa fa-check"></i>Chapter Overview</a></li>
+<li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#before-you-begin"><i class="fa fa-check"></i>Before You Begin</a></li>
 <li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#layout-of-this-chapter"><i class="fa fa-check"></i>Layout of This Chapter</a></li>
-<li class="chapter" data-level="4.1" data-path="ch4.html"><a href="ch4.html#randomness"><i class="fa fa-check"></i><b>4.1</b> Introducing Randomness</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="ch4.html"><a href="ch4.html#random-deviates"><i class="fa fa-check"></i><b>4.1.1</b> Random deviates</a></li>
-<li class="chapter" data-level="4.1.2" data-path="ch4.html"><a href="ch4.html#resampling"><i class="fa fa-check"></i><b>4.1.2</b> Resampling</a></li>
+<li class="chapter" data-level="1.1" data-path="ch4.html"><a href="ch4.html#randomness"><i class="fa fa-check"></i><b>1.1</b> Introducing Randomness</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="ch4.html"><a href="ch4.html#random-deviates"><i class="fa fa-check"></i><b>1.1.1</b> Random deviates</a></li>
+<li class="chapter" data-level="1.1.2" data-path="ch4.html"><a href="ch4.html#resampling"><i class="fa fa-check"></i><b>1.1.2</b> Resampling</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="ch4.html"><a href="ch4.html#reproducing-randomness"><i class="fa fa-check"></i><b>4.2</b> Reproducing Randomness</a></li>
-<li class="chapter" data-level="4.3" data-path="ch4.html"><a href="ch4.html#replication"><i class="fa fa-check"></i><b>4.3</b> Replication</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="ch4.html"><a href="ch4.html#replicate"><i class="fa fa-check"></i><b>4.3.1</b> <code>replicate()</code></a></li>
-<li class="chapter" data-level="4.3.2" data-path="ch4.html"><a href="ch4.html#for-loops"><i class="fa fa-check"></i><b>4.3.2</b> The <code>for()</code> loop</a></li>
+<li class="chapter" data-level="1.2" data-path="ch4.html"><a href="ch4.html#reproducing-randomness"><i class="fa fa-check"></i><b>1.2</b> Reproducing Randomness</a></li>
+<li class="chapter" data-level="1.3" data-path="ch4.html"><a href="ch4.html#replication"><i class="fa fa-check"></i><b>1.3</b> Replication</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="ch4.html"><a href="ch4.html#replicate"><i class="fa fa-check"></i><b>1.3.1</b> <code>replicate()</code></a></li>
+<li class="chapter" data-level="1.3.2" data-path="ch4.html"><a href="ch4.html#for-loops"><i class="fa fa-check"></i><b>1.3.2</b> The <code>for()</code> loop</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="ch4.html"><a href="ch4.html#adv-funcs"><i class="fa fa-check"></i><b>4.4</b> Function Writing</a></li>
-<li class="chapter" data-level="4.5" data-path="ch4.html"><a href="ch4.html#mc-summaries"><i class="fa fa-check"></i><b>4.5</b> Summarization</a><ul>
-<li class="chapter" data-level="4.5.1" data-path="ch4.html"><a href="ch4.html#central-tendency"><i class="fa fa-check"></i><b>4.5.1</b> Central Tendency</a></li>
-<li class="chapter" data-level="4.5.2" data-path="ch4.html"><a href="ch4.html#variability"><i class="fa fa-check"></i><b>4.5.2</b> Variability</a></li>
-<li class="chapter" data-level="4.5.3" data-path="ch4.html"><a href="ch4.html#frequencies"><i class="fa fa-check"></i><b>4.5.3</b> Frequencies</a></li>
+<li class="chapter" data-level="1.4" data-path="ch4.html"><a href="ch4.html#adv-funcs"><i class="fa fa-check"></i><b>1.4</b> Function Writing</a></li>
+<li class="chapter" data-level="1.5" data-path="ch4.html"><a href="ch4.html#mc-summaries"><i class="fa fa-check"></i><b>1.5</b> Summarization</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="ch4.html"><a href="ch4.html#central-tendency"><i class="fa fa-check"></i><b>1.5.1</b> Central Tendency</a></li>
+<li class="chapter" data-level="1.5.2" data-path="ch4.html"><a href="ch4.html#variability"><i class="fa fa-check"></i><b>1.5.2</b> Variability</a></li>
+<li class="chapter" data-level="1.5.3" data-path="ch4.html"><a href="ch4.html#frequencies"><i class="fa fa-check"></i><b>1.5.3</b> Frequencies</a></li>
 </ul></li>
-<li class="chapter" data-level="4.6" data-path="ch4.html"><a href="ch4.html#sim-examples"><i class="fa fa-check"></i><b>4.6</b> Simulation-Based Examples</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="ch4.html"><a href="ch4.html#rnorm-ex"><i class="fa fa-check"></i><b>4.6.1</b> Test <code>rnorm</code></a></li>
-<li class="chapter" data-level="4.6.2" data-path="ch4.html"><a href="ch4.html#power-ex"><i class="fa fa-check"></i><b>4.6.2</b> Stochastic Power Analysis</a></li>
-<li class="chapter" data-level="4.6.3" data-path="ch4.html"><a href="ch4.html#harv-ex"><i class="fa fa-check"></i><b>4.6.3</b> Harvest Policy Analysis</a></li>
+<li class="chapter" data-level="1.6" data-path="ch4.html"><a href="ch4.html#sim-examples"><i class="fa fa-check"></i><b>1.6</b> Simulation-Based Examples</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="ch4.html"><a href="ch4.html#rnorm-ex"><i class="fa fa-check"></i><b>1.6.1</b> Test <code>rnorm</code></a></li>
+<li class="chapter" data-level="1.6.2" data-path="ch4.html"><a href="ch4.html#power-ex"><i class="fa fa-check"></i><b>1.6.2</b> Stochastic Power Analysis</a></li>
+<li class="chapter" data-level="1.6.3" data-path="ch4.html"><a href="ch4.html#harv-ex"><i class="fa fa-check"></i><b>1.6.3</b> Harvest Policy Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="ch4.html"><a href="ch4.html#resample-examples"><i class="fa fa-check"></i><b>4.7</b> Resampling-Based Examples</a><ul>
-<li class="chapter" data-level="4.7.1" data-path="ch4.html"><a href="ch4.html#boot-test-ex"><i class="fa fa-check"></i><b>4.7.1</b> The Bootstrap</a></li>
-<li class="chapter" data-level="4.7.2" data-path="ch4.html"><a href="ch4.html#perm-test-ex"><i class="fa fa-check"></i><b>4.7.2</b> Permutation Test</a></li>
+<li class="chapter" data-level="1.7" data-path="ch4.html"><a href="ch4.html#resample-examples"><i class="fa fa-check"></i><b>1.7</b> Resampling-Based Examples</a><ul>
+<li class="chapter" data-level="1.7.1" data-path="ch4.html"><a href="ch4.html#boot-test-ex"><i class="fa fa-check"></i><b>1.7.1</b> The Bootstrap</a></li>
+<li class="chapter" data-level="1.7.2" data-path="ch4.html"><a href="ch4.html#perm-test-ex"><i class="fa fa-check"></i><b>1.7.2</b> Permutation Test</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="ch4.html"><a href="ch4.html#exercise-4"><i class="fa fa-check"></i><b>4.8</b> Exercise 4</a><ul>
+<li class="chapter" data-level="1.8" data-path="ch4.html"><a href="ch4.html#population-dynamics"><i class="fa fa-check"></i><b>1.8</b> Population dynamics</a><ul>
+<li class="chapter" data-level="1.8.1" data-path="ch4.html"><a href="ch4.html#plot-steps"><i class="fa fa-check"></i><b>1.8.1</b> Plot steps</a></li>
+</ul></li>
+<li class="chapter" data-level="1.9" data-path="ch4.html"><a href="ch4.html#exercise-4"><i class="fa fa-check"></i><b>1.9</b> Exercise 4</a><ul>
 <li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#exercise-4a-required-material-only"><i class="fa fa-check"></i>Exercise 4A: Required Material Only</a></li>
 <li><a href="ch4.html#exercise-4b-test-rnorm">Exercise 4B: Test <code>rnorm</code></a></li>
 <li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#exercise-4c-stochastic-power-analysis"><i class="fa fa-check"></i>Exercise 4C: Stochastic Power Analysis</a></li>
@@ -271,69 +176,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ch4.html"><a href="ch4.html#exercise-4f-permutation-tests"><i class="fa fa-check"></i>Exercise 4F: Permutation Tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="ch5.html"><a href="ch5.html"><i class="fa fa-check"></i><b>5</b> Large Data Manipulation</a><ul>
-<li class="chapter" data-level="" data-path="ch5.html"><a href="ch5.html#chapter-overview-4"><i class="fa fa-check"></i>Chapter Overview</a></li>
-<li class="chapter" data-level="" data-path="ch5.html"><a href="ch5.html#before-you-begin-4"><i class="fa fa-check"></i>Before You Begin</a></li>
-<li class="chapter" data-level="5.1" data-path="ch5.html"><a href="ch5.html#aquiring-and-loading-packages"><i class="fa fa-check"></i><b>5.1</b> Aquiring and Loading Packages</a></li>
-<li class="chapter" data-level="5.2" data-path="ch5.html"><a href="ch5.html#the-data"><i class="fa fa-check"></i><b>5.2</b> The Data</a></li>
-<li class="chapter" data-level="5.3" data-path="ch5.html"><a href="ch5.html#change-format-using-melt"><i class="fa fa-check"></i><b>5.3</b> Change format using <code>melt()</code></a></li>
-<li class="chapter" data-level="5.4" data-path="ch5.html"><a href="ch5.html#join-data-sets-with-merge"><i class="fa fa-check"></i><b>5.4</b> Join Data Sets with <code>merge()</code></a></li>
-<li class="chapter" data-level="5.5" data-path="ch5.html"><a href="ch5.html#lagged-vectors"><i class="fa fa-check"></i><b>5.5</b> Lagged vectors</a></li>
-<li class="chapter" data-level="5.6" data-path="ch5.html"><a href="ch5.html#adding-columns-with-mutate"><i class="fa fa-check"></i><b>5.6</b> Adding columns with <code>mutate()</code></a></li>
-<li class="chapter" data-level="5.7" data-path="ch5.html"><a href="ch5.html#apply-to-all-years"><i class="fa fa-check"></i><b>5.7</b> Apply to all years</a></li>
-<li class="chapter" data-level="5.8" data-path="ch5.html"><a href="ch5.html#calculate-daily-means-with-summarize"><i class="fa fa-check"></i><b>5.8</b> Calculate Daily Means with <code>summarize()</code></a></li>
-<li class="chapter" data-level="5.9" data-path="ch5.html"><a href="ch5.html#more-summarize"><i class="fa fa-check"></i><b>5.9</b> More <code>summarize()</code></a></li>
-<li class="chapter" data-level="5.10" data-path="ch5.html"><a href="ch5.html#fit-the-model"><i class="fa fa-check"></i><b>5.10</b> Fit the Model</a></li>
-<li class="chapter" data-level="" data-path="ch5.html"><a href="ch5.html#exercise-5"><i class="fa fa-check"></i>Exercise 5</a><ul>
-<li class="chapter" data-level="" data-path="ch5.html"><a href="ch5.html#exercise-5-bonus"><i class="fa fa-check"></i>Exercise 5 Bonus</a></li>
+<li class="chapter" data-level="2" data-path="calves.html"><a href="calves.html"><i class="fa fa-check"></i><b>2</b> Calving interval example</a><ul>
+<li class="chapter" data-level="2.0.1" data-path="calves.html"><a href="calves.html#plot-steps-1"><i class="fa fa-check"></i><b>2.0.1</b> Plot steps</a></li>
+<li class="chapter" data-level="2.1" data-path="calves.html"><a href="calves.html#exercise-4-1"><i class="fa fa-check"></i><b>2.1</b> Exercise 4</a><ul>
+<li class="chapter" data-level="" data-path="calves.html"><a href="calves.html#exercise-4a-required-material-only-1"><i class="fa fa-check"></i>Exercise 4A: Required Material Only</a></li>
+<li><a href="calves.html#exercise-4b-test-rnorm-1">Exercise 4B: Test <code>rnorm</code></a></li>
+<li class="chapter" data-level="" data-path="calves.html"><a href="calves.html#exercise-4c-stochastic-power-analysis-1"><i class="fa fa-check"></i>Exercise 4C: Stochastic Power Analysis</a></li>
+<li class="chapter" data-level="" data-path="calves.html"><a href="calves.html#exercise-4d-harvest-policy-analysis-1"><i class="fa fa-check"></i>Exercise 4D: Harvest Policy Analysis</a></li>
+<li class="chapter" data-level="" data-path="calves.html"><a href="calves.html#exercise-4e-the-bootstrap-1"><i class="fa fa-check"></i>Exercise 4E: The Bootstrap</a></li>
+<li class="chapter" data-level="" data-path="calves.html"><a href="calves.html#exercise-4f-permutation-tests-1"><i class="fa fa-check"></i>Exercise 4F: Permutation Tests</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="ch6.html"><a href="ch6.html"><i class="fa fa-check"></i><b>6</b> Mapping and Spatial Analysis</a><ul>
-<li class="chapter" data-level="6.1" data-path="ch6.html"><a href="ch6.html#ch6overview"><i class="fa fa-check"></i><b>6.1</b> Chapter Overview</a></li>
-<li class="chapter" data-level="6.2" data-path="ch6.html"><a href="ch6.html#ch6beforeyoubegin"><i class="fa fa-check"></i><b>6.2</b> Before You Begin</a></li>
-<li class="chapter" data-level="6.3" data-path="ch6.html"><a href="ch6.html#intro"><i class="fa fa-check"></i><b>6.3</b> Geospatial Data</a></li>
-<li class="chapter" data-level="6.4" data-path="ch6.html"><a href="ch6.html#Import"><i class="fa fa-check"></i><b>6.4</b> Importing Geospatial Data</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="ch6.html"><a href="ch6.html#csv-files-1"><i class="fa fa-check"></i><b>6.4.1</b> <code>.csv</code> files</a></li>
-<li class="chapter" data-level="6.4.2" data-path="ch6.html"><a href="ch6.html#shp-files"><i class="fa fa-check"></i><b>6.4.2</b> <code>.shp</code> files</a></li>
+<li class="chapter" data-level="3" data-path="ch6.html"><a href="ch6.html"><i class="fa fa-check"></i><b>3</b> Matrix population models</a></li>
+<li class="chapter" data-level="4" data-path="ch4.html"><a href="ch4.html#sim-examples"><i class="fa fa-check"></i><b>4</b> Simulation-Based Examples</a><ul>
+<li class="chapter" data-level="4.0.1" data-path="ch4.html"><a href="ch4.html#rnorm-ex"><i class="fa fa-check"></i><b>4.0.1</b> Test <code>rnorm</code></a></li>
+<li class="chapter" data-level="4.0.2" data-path="ch4.html"><a href="ch4.html#power-ex"><i class="fa fa-check"></i><b>4.0.2</b> Stochastic Power Analysis</a></li>
+<li class="chapter" data-level="4.0.3" data-path="ch4.html"><a href="ch4.html#harv-ex"><i class="fa fa-check"></i><b>4.0.3</b> Harvest Policy Analysis</a></li>
+<li class="chapter" data-level="4.1" data-path="ch4.html"><a href="ch4.html#resample-examples"><i class="fa fa-check"></i><b>4.1</b> Resampling-Based Examples</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="ch4.html"><a href="ch4.html#boot-test-ex"><i class="fa fa-check"></i><b>4.1.1</b> The Bootstrap</a></li>
+<li class="chapter" data-level="4.1.2" data-path="ch4.html"><a href="ch4.html#perm-test-ex"><i class="fa fa-check"></i><b>4.1.2</b> Permutation Test</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="ch6.html"><a href="ch6.html#SpatPlot"><i class="fa fa-check"></i><b>6.5</b> Plotting</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="ch6.html"><a href="ch6.html#zoom"><i class="fa fa-check"></i><b>6.5.1</b> Zooming</a></li>
-<li class="chapter" data-level="6.5.2" data-path="ch6.html"><a href="ch6.html#plot-selections"><i class="fa fa-check"></i><b>6.5.2</b> Plotting Selections</a></li>
+<li class="chapter" data-level="4.2" data-path="sim-examples.html"><a href="sim-examples.html"><i class="fa fa-check"></i><b>4.2</b> Population dynamics</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="sim-examples.html"><a href="sim-examples.html#plot-steps-2"><i class="fa fa-check"></i><b>4.2.1</b> Plot steps</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="ch6.html"><a href="ch6.html#ManipSpat"><i class="fa fa-check"></i><b>6.6</b> Manipulating Spatial Data</a><ul>
-<li class="chapter" data-level="6.6.1" data-path="ch6.html"><a href="ch6.html#crs"><i class="fa fa-check"></i><b>6.6.1</b> Changing the CRS</a></li>
-<li class="chapter" data-level="6.6.2" data-path="ch6.html"><a href="ch6.html#clip"><i class="fa fa-check"></i><b>6.6.2</b> Clipping</a></li>
-<li class="chapter" data-level="6.6.3" data-path="ch6.html"><a href="ch6.html#add-attr"><i class="fa fa-check"></i><b>6.6.3</b> Adding Attributes</a></li>
+<li class="chapter" data-level="4.3" data-path="sim-examples.html"><a href="sim-examples.html#exercise-4-2"><i class="fa fa-check"></i><b>4.3</b> Exercise 4</a><ul>
+<li class="chapter" data-level="" data-path="sim-examples.html"><a href="sim-examples.html#exercise-4a-required-material-only-2"><i class="fa fa-check"></i>Exercise 4A: Required Material Only</a></li>
+<li><a href="sim-examples.html#exercise-4b-test-rnorm-2">Exercise 4B: Test <code>rnorm</code></a></li>
+<li class="chapter" data-level="" data-path="sim-examples.html"><a href="sim-examples.html#exercise-4c-stochastic-power-analysis-2"><i class="fa fa-check"></i>Exercise 4C: Stochastic Power Analysis</a></li>
+<li class="chapter" data-level="" data-path="sim-examples.html"><a href="sim-examples.html#exercise-4d-harvest-policy-analysis-2"><i class="fa fa-check"></i>Exercise 4D: Harvest Policy Analysis</a></li>
+<li class="chapter" data-level="" data-path="sim-examples.html"><a href="sim-examples.html#exercise-4e-the-bootstrap-2"><i class="fa fa-check"></i>Exercise 4E: The Bootstrap</a></li>
+<li class="chapter" data-level="" data-path="sim-examples.html"><a href="sim-examples.html#exercise-4f-permutation-tests-2"><i class="fa fa-check"></i>Exercise 4F: Permutation Tests</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="ch6.html"><a href="ch6.html#Anal"><i class="fa fa-check"></i><b>6.7</b> Analysis</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="ch6.html"><a href="ch6.html#hr-Anal"><i class="fa fa-check"></i><b>6.7.1</b> Home Range Analysis</a></li>
-<li class="chapter" data-level="6.7.2" data-path="ch6.html"><a href="ch6.html#finding-intersections-between-two-layers"><i class="fa fa-check"></i><b>6.7.2</b> Finding Intersections Between Two Layers</a></li>
-</ul></li>
-<li class="chapter" data-level="6.8" data-path="ch6.html"><a href="ch6.html#base-maps"><i class="fa fa-check"></i><b>6.8</b> Creating a Presentable Map</a></li>
-<li class="chapter" data-level="6.9" data-path="ch6.html"><a href="ch6.html#other-r-mapping-packages"><i class="fa fa-check"></i><b>6.9</b> Other R Mapping Packages</a><ul>
-<li class="chapter" data-level="6.9.1" data-path="ch6.html"><a href="ch6.html#ggmap"><i class="fa fa-check"></i><b>6.9.1</b> <code>{ggmap}</code></a></li>
-<li class="chapter" data-level="6.9.2" data-path="ch6.html"><a href="ch6.html#leaflet"><i class="fa fa-check"></i><b>6.9.2</b> <code>{leaflet}</code></a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="ch6.html"><a href="ch6.html#ex6"><i class="fa fa-check"></i>Exercise 6</a></li>
-<li class="chapter" data-level="" data-path="ch6.html"><a href="ch6.html#exercise-6-bonus"><i class="fa fa-check"></i>Exercise 6 Bonus</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html"><i class="fa fa-check"></i>Exercise Solutions</a><ul>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex2-answers"><i class="fa fa-check"></i>Exercise 1 Solutions</a><ul>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex1a-answers"><i class="fa fa-check"></i>Exercise 1A Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex1b-answers"><i class="fa fa-check"></i>Exercise 1B Solutions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex2-answers"><i class="fa fa-check"></i>Exercise 2 Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex3-answers"><i class="fa fa-check"></i>Exercise 3 Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4-answers"><i class="fa fa-check"></i>Exercise 4 Solutions</a><ul>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4a-answers"><i class="fa fa-check"></i>Exercise 4A Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4b-answers"><i class="fa fa-check"></i>Exercise 4B Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4c-answers"><i class="fa fa-check"></i>Exercise 4C Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4d-answers"><i class="fa fa-check"></i>Exercise 4D Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4e-answers"><i class="fa fa-check"></i>Exercise 4E Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex4f-answers"><i class="fa fa-check"></i>Exercise 4F Solutions</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex5-answers"><i class="fa fa-check"></i>Exercise 5 Solutions</a></li>
-<li class="chapter" data-level="" data-path="exercise-solutions.html"><a href="exercise-solutions.html#ex6-answers"><i class="fa fa-check"></i>Exercise 6 Solutions</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/davan690/au-r-workshop" target="blank">Get the Data</a></li>
@@ -347,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Natural Resource Scientists</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to R for Population dynamics</a>
           </h1>
         </div>
 
@@ -356,142 +229,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Introduction to R for Natural Resource Scientists</h1>
-<p class="author"><em>Ben Staton</em></p>
-<p class="date"><em>with contributions by Henry Hershey</em></p>
+<h1 class="title">Introduction to R for Population dynamics</h1>
+<p class="author"><em>Anthony Davidson</em></p>
+<p class="date"><em>Build from Ben Statons R book with contributions by Henry Hershey</em></p>
 </div>
 <div id="overview" class="section level1 unnumbered">
 <h1>Overview</h1>
-<p><a href="https://github.com/bstaton1/au-r-workshop/"><img src="img/cover_image.png" width="250" height="375" alt="Cover image" align="right" style="margin: 0 1em 0 1em" /></a>This book is intended to be a first course in R programming for natural resource professionals. It is by no means comprehensive (no book about R ever could be), but instead attempts to introduce the main topics needed to get a beginner up and running with applying R to their own work. It is intended to be a companion to in-person workshop sessions, in which each chapter is covered in a 2 hour session, however it can be used as “self-teach” manual as well. Although the examples shown have a natural resource/ecological theme, the general skills presented are general to R users across all scientific disciplines.</p>
+<p>To begin with this model defines the life cycle of a species, then extendes this to estimate population size and growth rate over a projected time frame and then analysis the elasticity and sensistivity of the matrix population model. I have done this with southern right whales as an example.</p>
 <div id="what-is-covered" class="section level2 unnumbered">
 <h2>What is Covered?</h2>
 <p>The book is composed of six chapters intended to cover a suite of topics in introductory R programming. In general, the material builds in complexity from chapter to chapter and earlier chapters can be seen as prerequisites for later chapters.</p>
 <ul>
-<li><strong>Chapter <a href="ch1.html#ch1">1</a></strong> covers the basics of working in R through RStudio, including the basics of the R coding language and environment.</li>
-<li><strong>Chapter <a href="ch2.html#ch2">2</a></strong> covers the basics of plotting using the base R graphics functionality.</li>
-<li><strong>Chapter <a href="ch3.html#ch3">3</a></strong> covers the basics of fitting statistical models using built-in functionality for generalized linear models as well as non-linear models.<br />
+<li><strong>Chapter <a href="#ch1"><strong>??</strong></a></strong> covers the basics of working in R through RStudio, including the basics of the R coding language and environment.</li>
+<li><strong>Chapter <a href="#ch2"><strong>??</strong></a></strong> covers the basics of plotting using the base R graphics functionality.</li>
+<li><strong>Chapter <a href="#ch3"><strong>??</strong></a></strong> covers the basics of fitting statistical models using built-in functionality for generalized linear models as well as non-linear models.<br />
 </li>
-<li><strong>Chapter <a href="ch4.html#ch4">4</a></strong> covers the basics of simulation modeling in R.</li>
-<li><strong>Chapter <a href="ch5.html#ch5">5</a></strong> covers the basics of the <code>{dplyr}</code> and <code>{reshape2}</code> packages for manipulating and summarizing large data sets using highly readable code.</li>
-<li><strong>Chapter <a href="ch6.html#ch6">6</a></strong> covers the basics of producing maps and performing spatial analysis in R. <em>This chapter was contributed by Henry Hershey</em></li>
+<li><strong>Chapter <a href="ch4.html#ch4">1</a></strong> covers the basics of simulation modeling in R.</li>
+<li><strong>Chapter <a href="#ch5"><strong>??</strong></a></strong> covers the basics of the <code>{dplyr}</code> and <code>{reshape2}</code> packages for manipulating and summarizing large data sets using highly readable code.</li>
+<li><strong>Chapter <a href="ch6.html#ch6">3</a></strong> covers the basics of producing maps and performing spatial analysis in R. <em>This chapter was contributed by Henry Hershey</em></li>
 </ul>
 </div>
-<div id="prerequisites" class="section level2 unnumbered">
-<h2>Prerequisites</h2>
-<p>Chapter <a href="ch1.html#ch1">1</a> starts at the first step (installing R) and progresses by assuming no prior knowledge of programming in R or in any other language. In the later chapters, e.g., Chapters <a href="ch3.html#ch3">3</a> and <a href="ch4.html#ch4">4</a>, an understanding of statistics at the introductory undergraduate level would be helpful but not strictly essential.</p>
-<p>There are, however, some tasks you’ll need to complete before using this book, which are described in the two sections that follow.</p>
-<div id="comp-prep" class="section level3 unnumbered">
-<h3>Prepare Your Computer</h3>
-<div id="install" class="section level4 unnumbered">
-<h4>Installation</h4>
-<p>First off, you will need to get R and RStudio<a href="exercise-solutions.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> onto your computer. Go to:</p>
-<ul>
-<li><a href="https://cran.rstudio.com/" class="uri">https://cran.rstudio.com/</a> to get R and</li>
-<li><a href="https://www.rstudio.com/products/rstudio/download/" class="uri">https://www.rstudio.com/products/rstudio/download/</a> to get RStudio Desktop.</li>
-</ul>
-<p>Download the appropriate installation file for your operating system and run that file. All default settings should be fine.</p>
-</div>
-<div id="optional-configuration" class="section level4 unnumbered">
-<h4>Optional Configuration</h4>
-<p>As a matter of personal preference, you are recommended to configure a few settings. Open up RStudio and go to <em>Tools &gt; Global Options</em>, and in the section listed “General”:</p>
-<ul>
-<li>Make sure <em>Restore .RData into workspace at startup</em> is <strong>unchecked</strong></li>
-<li>Make sure <em>Save workspace to .RData on exit</em> is set to <strong>Never</strong></li>
-<li>Make sure <em>Always save history (even when not saving .RData)</em> is <strong>unchecked</strong>.</li>
-</ul>
-<p>These settings will prevent you from getting a bunch of useless files and dialog boxes every time you open and close R.</p>
-</div>
-<div id="create-a-book-directory" class="section level4 unnumbered">
-<h4>Create a Book Directory</h4>
-<p>You should create a devoted folder on your computer for this book. All examples will assume this folder is located here: <code>C:/Users/YOU/Documents/R-Book</code>. Change <code>YOU</code> to be specific for your computer.</p>
-</div>
-<div id="data-sets" class="section level4 unnumbered">
-<h4>Data Sets</h4>
-<p>The data sets<a href="exercise-solutions.html#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
-used in this book are hosted on a GitHub repository maintained by the author. It is located here: <a href="https://github.com/bstaton1/au-r-workshop-data" class="uri">https://github.com/bstaton1/au-r-workshop-data</a>.</p>
-<p>To acquire the data for this book, you should:</p>
-<ol style="list-style-type: decimal">
-<li>Navigate to the GitHub repository</li>
-<li>click the green <em>Clone or download</em> button at the top right,</li>
-<li>click <em>Download ZIP</em></li>
-<li>unzip the contents of this folder into the location: <code>C:/Users/YOU/Documents/R-Book/Data</code></li>
-</ol>
-<p>File organization will be very important for your success in learning to use R. This book will assume your <code>R-Book</code> directory is organized as shown below. Notice that there is a separate folder for the data downloaded from GitHub as well as one for each chapter that will house the R code for that chapter. Do not worry about making all of these folders now, you will do this at the appropriate time as you work your way through this book. For now, just make sure there is a <code>Data</code> folder that contains all of the unzipped contents from the GitHub repository your main <code>R-Book</code> directory.</p>
-<pre><code>##          levelName
-## 1  R-Book         
-## 2   ¦--Data       
-## 3   ¦   ¦--asl.csv
-## 4   ¦   ¦--...    
-## 5   ¦   °--Ch6    
-## 6   ¦--Chapter1   
-## 7   ¦   ¦--Ch1.R  
-## 8   ¦   ¦--Ex1A.R 
-## 9   ¦   °--Ex1B.R 
-## 10  ¦--Chapter2   
-## 11  ¦   ¦--Ch2.R  
-## 12  ¦   °--Ex2.R  
-## 13  ¦--Chapter3   
-## 14  ¦--Chapter4   
-## 15  ¦--Chapter5   
-## 16  °--Chapter6</code></pre>
-</div>
-</div>
-</div>
-<div id="exercises" class="section level2 unnumbered">
-<h2>Exercises</h2>
-<p>Following each chapter, there is a set of exercises. You should attempt and complete them, as they give you an opportunity to practice what you learned while reading and typing along. Solutions are provided at the end of this book, however you are <strong>strongly</strong> recommended to attempt to figure the problems out on your own before looking to how the author would solve them.</p>
-<p>Some exercises have bonus questions. These are intended to challenge you with some of the more difficult tasks shown in the chapter or ask you to extend what you learned to a completely different problem. If you can get all of the non-bonus questions without looking at the solutions too much, you can consider yourself to have good understanding of that chapter’s material. If you can complete the bonus questions with little or no help, that means you have mastered that chapter’s material!</p>
-</div>
-<div id="notation" class="section level2 unnumbered">
-<h2>Text Conventions</h2>
-<ul>
-<li>Regular text: a description of what you you should do, how some code works, or a general narrative of something.</li>
-<li><code>monospace</code>: references something in R
-<ul>
-<li><code>this()</code> references some function</li>
-<li><code>this</code> references some other object</li>
-<li><code>{this}</code> references an R package</li>
-<li><code>C:/This</code> is a file path</li>
-</ul></li>
-<li><strong>Bold</strong> is intended to provide more emphasis to a word or topic. In general, new topics are introduced this way.</li>
-<li><a href="index.html#notation">Links</a>: this is a link to some other location in this book. External links are provided with a full URL.</li>
-<li><span class="math inline">\(Equations\)</span>: it is sometimes useful to describe concepts mathematically before showing how to do it in R.</li>
-<li><a href="exercise-solutions.html#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>: a footnote containing more information.</li>
-</ul>
-</div>
-<div id="keyboard-shortcuts" class="section level2 unnumbered">
-<h2>Keyboard Shortcuts</h2>
-<p>Several parts of this book in this book make reference to keyboard shortcuts. They are never necessary, but can help you be more efficient if you commit them to muscle memory. This book assumes you are using a PC for the keyboard shortcuts. If you are using a Mac, they will be different<a href="exercise-solutions.html#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>. For a complete list of RStudio’s keyboard shortcuts specific to your operating system, go to <em>Help &gt; Keyboard Shortcuts Help</em>.</p>
-</div>
-<div id="development-of-this-book" class="section level2 unnumbered">
-<h2>Development of this Book</h2>
-<p>This book represents the third reincarnation of the Auburn R Workshop Series. The first version was written in Fall 2014 using Microsoft Word, but the author found that making even small changes was clunky - each change to code in the document required a copy-paste of code and output from R to Word. Individual session materials (i.e., handout, exercises, solutions, data) were created in separate documents, saved as PDFs and <code>.xlsx</code> files, and uploaded to a wordpress webpage.</p>
-<p>The second version was written through R <span class="citation">(R Core Team <a href="#ref-R-base" role="doc-biblioref">2018</a>)</span> and RStudio using the R packages <code>{rmarkdown}</code> <span class="citation">(Allaire et al. <a href="#ref-R-rmarkdown" role="doc-biblioref">2018</a>)</span> and <code>{knitr}</code> <span class="citation">(Xie <a href="#ref-R-knitr" role="doc-biblioref">2018</a><a href="#ref-R-knitr" role="doc-biblioref">b</a>, <a href="#ref-knitr-cite" role="doc-biblioref">2015</a>)</span>, which allowed the integration of text, code, and output all into one output file. This version was completed in Fall 2015. Like the first version, individual session materials were created in separate documents, and replaced those previously found on the wordpress site.</p>
-<p>This third version was written through R and RStudio but used the R package <code>{bookdown}</code> <span class="citation">(Xie <a href="#ref-R-bookdown" role="doc-biblioref">2018</a><a href="#ref-R-bookdown" role="doc-biblioref">a</a>)</span> which allowed for the individual sessions to be combined into one “book” by turning each session into a chapter. This facilitated cross-references to topics covered in previous chapters and allows the reader to only refer to one location when trying to remember how to use a skill. It also allowed for multiple formats to be published including both HTML and PDF versions.</p>
-<p>The book is hosted on <a href="https://pages.github.com/">GitHub Pages</a>, and was last built on 10-31-2019.</p>
-</div>
-<div id="about-the-author" class="section level2 unnumbered">
-<h2>About the Author</h2>
-<p>Ben Staton is a PhD candidate in the School of Fisheries at Auburn University. He studies quantitative methods for assessing fish populations for use in harvest management, with a focus on Pacific salmon in western Alaska. His interests are in population dynamics, Bayesian methods, Monte Carlo methods, and reproducible research. Ben has been using R on a daily basis since the beginning of his graduate work in 2014, and is enthusiastic about helping others learn to use R for their own work.</p>
+<div id="external-resources" class="section level2">
+<h2><span class="header-section-number">0.1</span> External Resources</h2>
+<p><a href="https://github.com/bstaton1/au-r-workshop/"><img src="img/cover_image.png" width="250" height="375" alt="Cover image" align="right" style="margin: 0 1em 0 1em" /></a>This book is an extention of several gitbooks that are intended to be a first course in R programming for a range of different professionals. It is by no means comprehensive (no book about R ever could be), but instead attempts to introduce the main topics and develop the skills needed to get a beginner up and running with applying R to their own work in the context of population dynamics. Some of the courses were intended to be a companion to in-person workshop sessions. Although the examples shown have a natural resource/ecological theme, the general skills presented are general to R users across all scientific disciplines.</p>
 
-</div>
-</div>
-<h3>References</h3>
-<div id="refs" class="references">
-<div id="ref-R-rmarkdown">
-<p>Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, and Winston Chang. 2018. <em>Rmarkdown: Dynamic Documents for R</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.</p>
-</div>
-<div id="ref-R-base">
-<p>R Core Team. 2018. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.</p>
-</div>
-<div id="ref-knitr-cite">
-<p>Xie, Yihui. 2015. <em>Dynamic Documents with R and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.name/knitr/">http://yihui.name/knitr/</a>.</p>
-</div>
-<div id="ref-R-bookdown">
-<p>Xie, Yihui. 2018a. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.</p>
-</div>
-<div id="ref-R-knitr">
-<p>Xie, Yihui. 2018b. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in R</em>. <a href="https://CRAN.R-project.org/package=knitr">https://CRAN.R-project.org/package=knitr</a>.</p>
 </div>
 </div>
             </section>
@@ -500,7 +261,7 @@ used in this book are hosted on a GitHub repository maintained by the author. It
         </div>
       </div>
 
-<a href="ch1.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ch4.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -529,7 +290,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["au-r-workshop.docx"],
+"download": ["A beginners guide to population dynamics.docx"],
 "toc": {
 "collapse": "section"
 }

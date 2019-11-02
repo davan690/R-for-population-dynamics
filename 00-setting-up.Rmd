@@ -1,0 +1,96 @@
+# Getting started {#setup}
+
+This chapter (\@ref, ch1) starts starts with the program setup (installing R) assuming no prior knowledge of programming in R or in any other language. In the later chapters, e.g., Chapters \@ref(ch2) and \@ref(ch3), an understanding of statistics at the introductory undergraduate level would be helpful but not strictly essential.
+
+There are, however, some tasks you'll need to complete before using this book, which are described in the two sections that follow.
+
+## Prepare Your Computer {-#comp-prep}
+
+### Installation {-#install}
+
+First off, you will need to get R and RStudio^[While it is possible to run R on its own, it is clunky. You are strongly advised to use the RStudio IDE (integrated development environment) given its compactness, neat features, code tools (like syntax and parentheses highlighting). This workshop will assume you are using RStudio] onto your computer. Go to:
+
+*  <https://cran.rstudio.com/> to get R and
+*  <https://www.rstudio.com/products/rstudio/download/> to get RStudio Desktop.
+
+Download the appropriate installation file for your operating system and run that file. All default settings should be fine. 
+
+### Optional Configuration {-}
+
+As a matter of personal preference, you are recommended to configure a few settings. Open up RStudio and go to _Tools > Global Options_, and in the section listed "General":
+
+*  Make sure _Restore .RData into workspace at startup_ is **unchecked**
+*  Make sure _Save workspace to .RData on exit_ is set to **Never**
+*  Make sure _Always save history (even when not saving .RData)_ is **unchecked**.
+
+These settings will prevent you from getting a bunch of useless files and dialog boxes every time you open and close R.
+
+### Create a Book Directory {-}
+
+You should create a devoted folder on your computer for this book. All examples will assume this folder is located here: `C:/Users/YOU/Documents/R-Book`. Change `YOU` to be specific for your computer.
+
+### Data Sets {-#data-sets}
+
+The data sets^[Many of the data sets used in this book were simulated by the author. Cases in which the data set used was not simulated are noted and a citation to the data source is provided. More details on the individual data sets can be found on the GitHub repository.]
+ used in this book are hosted on a GitHub repository maintained by the author. It is located here: <https://github.com/bstaton1/au-r-workshop-data>.
+
+To acquire the data for this book, you should:
+
+  1.  Navigate to the GitHub repository
+  2.  click the green _Clone or download_ button at the top right,
+  3.  click _Download ZIP_
+  4.  unzip the contents of this folder into the location: `C:/Users/YOU/Documents/R-Book/Data`
+
+File organization will be very important for your success in learning to use R. This book will assume your `R-Book` directory is organized as shown below. Notice that there is a separate folder for the data downloaded from GitHub as well as one for each chapter that will house the R code for that chapter. Do not worry about making all of these folders now, you will do this at the appropriate time as you work your way through this book. For now, just make sure there is a `Data` folder that contains all of the unzipped contents from the GitHub repository your main `R-Book` directory. This is the current status:
+
+```{r, echo = F}
+path = c(
+  "R-Book/Data/asl.csv",
+  "R-Book/Data/...",
+  "R-Book/Data/Ch6",
+  "R-Book/Chapter1/Ch1.R",
+  "R-Book/Chapter1/Ex1A.R",
+  "R-Book/Chapter1/Ex1B.R",
+  "R-Book/Chapter2/Ch2.R",
+  "R-Book/Chapter2/Ex2.R",
+  "R-Book/Chapter3",
+  "R-Book/Chapter4",
+  "R-Book/Chapter5",
+  "R-Book/Chapter6"
+)
+
+data.tree::as.Node(data.frame(pathString = path))
+```
+
+## Exercises {-}
+
+Following each chapter, there are a collection of different exercises adapted from my own collaborations and the books I have merged to create this one. :) You should attempt and complete them, as they give you an opportunity to practice what you learned while reading and typing along. Solutions are provided at the end of this book, however you are **strongly** recommended to attempt to figure the problems out on your own before looking to how the author would solve them.
+
+Some exercises have bonus questions. These are intended to challenge you with some of the more difficult tasks shown in the chapter or ask you to extend what you learned to a completely different problem. If you can get all of the non-bonus questions without looking at the solutions too much, you can consider yourself to have good understanding of that chapter's material. If you can complete the bonus questions with little or no help, that means you have mastered that chapter's material!
+
+## Text Conventions {-#notation}
+
+*  Regular text: a description of what you you should do, how some code works, or a general narrative of something.
+*  `monospace`: references something in R
+    *  `this()` references some function
+    *  `this` references some other object
+    *  `{this}` references an R package
+    *  `C:/This` is a file path
+*  **Bold** is intended to provide more emphasis to a word or topic. In general, new topics are introduced this way.
+*  [Links](#notation): this is a link to some other location in this book. External links are provided with a full URL.
+*  $Equations$: it is sometimes useful to describe concepts mathematically before showing how to do it in R.
+*  ^[This is a footnote. If you're viewing this on GitHub Pages, click the arrow to the right to return to the text]: a footnote containing more information.
+
+## Keyboard Shortcuts {-}
+
+Several parts of this book in this book make reference to keyboard shortcuts. They are never necessary, but can help you be more efficient if you commit them to muscle memory. This book assumes you are using a PC for the keyboard shortcuts. If you are using a Mac, they will be different^[For some keyboard shortcuts, you may just need to swap out the **CTRL** keystroke for the **CMD** keystroke for a Mac computer]. For a complete list of RStudio's keyboard shortcuts specific to your operating system, go to _Help > Keyboard Shortcuts Help_.
+
+## Development of this Book {-}
+
+This book represents the first draft of a population dynamics text. It also combines the third reincarnation of the Auburn R Workshop Series, the pirateeeeR book and other R-books.
+
+The book is hosted on [GitHub Pages](https://pages.github.com/), and was last built on `r format(Sys.time(), format = "%m-%d-%Y")`.
+
+## About the orginal Author (Ben Staton) {-}
+
+Ben Staton is a PhD candidate in the School of Fisheries at Auburn University. He studies quantitative methods for assessing fish populations for use in harvest management, with a focus on Pacific salmon in western Alaska. His interests are in population dynamics, Bayesian methods, Monte Carlo methods, and reproducible research. Ben has been using R on a daily basis since the beginning of his graduate work in 2014, and is enthusiastic about helping others learn to use R for their own work. 
