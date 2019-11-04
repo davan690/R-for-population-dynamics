@@ -1,0 +1,537 @@
+---
+title: "NZ SRW Modelling Report"
+author: "Anthony Davidson"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  html_document: default
+  pdf_document: default
+geometry: margin=0.1in
+fontsize: 14pt
+---
+
+```{r setup, echo=FALSE, warning = FALSE, message = FALSE}
+#NZJFMS manuscript
+#15032017
+#Anthony Davidson
+
+#packages
+library(boot) 
+library(dplyr)
+library(ggplot2)
+library(quadprog)
+library(popbio)
+library(DiagrammeRsvg)
+library(DiagrammeR)
+#set working dir
+#laptop
+# setwd("C:/Users/s435389/Dropbox/ESR Publication Matrix model/All_final_analysis")
+#work desktop
+
+###############################DATA####################################
+#dat <- read.csv("RawCI.csv", header=T, quote="\"")
+```
+
+```{r function_from_compadreDB, echo=FALSE}
+plotLifeCycle <- function(A,title="my life cycle",shape="egg",fontsize=10,nodefontsize=12,edgecol="grey"){
+
+
+#Identify the stages
+rownames(A)<-colnames(A)
+
+#Remove the unnecessary "A"
+Astages<-gsub("A","",colnames(A))
+
+#Construct a "from"->"to" dataset (edges)
+fromTo<-expand.grid(Astages,Astages)
+names(fromTo) <- c("From","To")
+
+#Loop through the edges to get the quantities 
+#(transition probabilities and fecundity)
+for(i in 1:nrow(fromTo)){
+fromTo$quantity[i] <- A[fromTo$To[i],fromTo$From[i]]  
+}
+
+#Subset to only include those where the quantity >0
+temp<- subset(fromTo,fromTo$quantity > 0)
+temp
+
+#Create sorted vector of node names
+allNodes <- sort(unique(c(as.character(temp[,1]),as.character(temp[,2]))))
+
+#Add a semi-colon, for use by graphviz
+allNodes <- paste(allNodes,collapse="; ")
+
+#Manipulate minimim length of edge to make the plot pretty.
+#Experimental!!
+temp$minLVal <-as.numeric(temp[,2])-as.numeric(temp[,1])
+temp$minLVal <- temp$minLVal*3
+temp
+
+#Create the edges argument for graphviz
+#by pasting commands together.
+#Note, one could modify this to alter the outputs away from my defaults.
+allEdges <- paste(temp[,1],"->",temp[,2],"[minlen=",temp[,"minLVal"],",fontsize=",fontsize,",color=",edgecol,",xlabel=",
+                  paste("\"",round(temp[,3],3)),"\"]\n",collapse="")
+
+#The graphviz argument, pasted together
+grViz(paste(
+"digraph {
+  {
+    graph[overlap=false];
+    rank=same;
+node [shape=",shape,", fontsize=",nodefontsize,"];
+    
+",
+allNodes
+,"
+  }
+  ordering=out
+  x [style=invis]
+  x -> {",allNodes,"} [style=invis]",
+  allEdges,
+"
+# title
+    labelloc=\"t\";
+    label=\"",title,"\"
+}"
+))
+}
+```
+
+#Life-cycle
+
+```{r matrix, echo=FALSE}
+#Basic matrix population model
+#################fixed parameters##############
+#stage length
+C<-1
+J<-7.74
+A<-65
+
+#Survival 
+Sc<-0.914
+Sj<-0.98
+Sa<-0.98
+
+#transition
+Tc<-1 #because it is 100 percent transition
+Tj<-0.09083720
+Ta<-0 #because there is no transition
+
+#reproduction
+Ma<-(1/3.14)/2
+
+Fa<-(Sa*Ma)
+
+#########setting up matrix and array's##############
+
+M <-matrix(c(0,(Sc*1),0,0,(Sj*(1-Tj)),(Sj*Tj),(Fa),0,(Sa)),nrow=3)
+colnames(M) <- c("calf", "juv", "adult")
+M
+```
+
+This life cycle is wrong but I am unsure why????
+
+```{r plot_lifecycle, echo=FALSE}
+#plotting lifecycle needs the followingparameters
+# --- A = matrix i think...
+# --- title="my life cycle"
+# --- shape="egg"
+# --- fontsize=10
+# --- nodefontsize=12
+# --- edgecol="grey"
+
+plotLifeCycle(A = M, title = "Southern Right Whale")
+
+```
+
+#Raw data
+<!--The data frame imported from Will is as follows:-->
+This is where I would like to put the estimates of population size for SRWs that has been estimated...
+
+For example:
+
+??
+
+##Population growth rate
+```{r}
+#growth rate analysis 
+
+#Using popbio find dominantsssssss =eigen value :)
+eigen.analysis(M, zero=TRUE)
+eigen(M)
+```
+
+$$\lambda = 1.054$$
+
+##Simulation using matrix
+```{r population_projection}
+#Growth rate plots
+#To be contiuned from growth rate code
+#29062014
+#Anthony Davidson
+
+#Growth rate plot 30 years
+eigen(M)$value[1]
+
+Time<-30
+Stages<-3
+iter<-1000
+N_total<-1221
+
+growth_check<-array(NA,dim=iter)
+
+
+Popsize<-matrix(NA,ncol=Time,nrow=iter)
+popsize_run<-array(NA,dim=Time)
+finalsize <-array(NA,dim=iter)
+
+
+for(i in 1:iter){
+  N<-matrix(NA,ncol=Time,nrow=Stages)
+  
+  N[1,1]<-407
+  N[2,1]<-407
+  N[3,1]<-407
+  
+  for(t in 2:Time){
+    N[ ,t]<-M%*%N[ ,t-1]
+    popsize_run[t]=sum(N[ ,t])
+    
+  }
+
+  Popsize[i,]<-popsize_run
+}
+
+
+#######################Ploting size 30 data set########################
+
+#plot information total population size for 30 runs
+
+plot(N[1,],main="Exponential growth under current model conditions",col="red",xlab="Time in years ",ylab="Projected population size",type="l",lwd=2,ylim=c(0,6000))
+lines(N[2,],type="l",col="blue",lwd=2)
+lines(N[3,],type="l",col="green",lwd=2)
+legend(5,4000, title="Legend",c("Calves", "Juvenile", "Adults"), col = c("red", "blue", "green"),
+       text.col = "black", lwd = c(2, 2, 2),
+       merge = TRUE, bg = "gray90")
+```
+
+
+#transisiton parameter
+```{r transisiton parameter}
+
+#Code for fixed and irative methods of transisition parameter
+#17072013
+#Anthony Davidson
+#Msc
+
+#Fixed Parameter estimates
+#run Final growth rate code first
+
+
+
+iterations<-10000 #save iter
+
+#Set up arrays
+lambda<-array(NA,dim=iterations)
+Tj<-array(NA,dim=iterations)
+
+#Starting values
+
+lambda[1]=1.05
+
+Tj[1]<-0.0979
+
+#saving first matrix
+
+M <-matrix(c(0,(Sc*1),0,0,(Sj*(1-0.09083720)),(Sj*0.09083720),((Fa*Sa)+(Fa*(Sj*0.09083720))),0,(Sa*(1-0))),nrow=3)
+
+lambda(M)
+#writing loop
+
+for(i in 2:iterations){
+  
+  lambda[i]=eigen(M)$values[1]               
+ 
+  Tj[i]<-(((Sj/lambda[i])^J)-((Sj/lambda[i])^(J-1)))/(((Sj/lambda[i])^J)-1)
+ 
+  
+  M <-matrix(c(0,(Sc*1),0,0,(Sj*(1-Tj[i])),(Sj*Tj[i]),((Fa*Sa)+(Fa*(Sj*Tj[i]))),0,(Sa*(1-0))),nrow=3)
+
+}
+
+0.98*(1-0.0979)
+0.98*0.0979
+#plot options
+?ylim
+
+par(mfrow=c(1,1))
+plot(lambda[1:10],main="First 10 iterations with lamdba = 1.05 ",
+     type="p",xlab="Number of updates (iterations)",
+     ylab="Estimate of lamdba",ylim=c(1.05,1.065))
+
+```
+
+#stable stage distribution
+
+
+```{r SSD}
+
+#Stable stage distribution
+#29062014
+#Anthony Davidson
+
+library(popbio)
+library(quadprog)
+#Basic matrix population model
+
+#################fixed parameters##############
+#see M matrix generation in Final growth rate for M
+#########setting up matrix and array's##############
+
+g1<-M[2,1]
+p2<-M[2,2]
+g1<-M[2,1]
+g2<-M[3,2]
+p2<-M[2,2]
+p3<-M[3,3]
+
+r=eigen(M)$value[1]
+
+w1<-1
+w2<-(g1/(r-p2))
+w3<-((g1*g2)/((r-p2)*(r-p3)))
+
+w<-cbind(w1,w2,w3)
+
+w
+#####Plot#####
+par(mfrow=c(1,1))
+barplot(w, main="Stable stage dirstibution for NZ SRW",ylim=c(0,1))
+
+###The simple way######
+
+a<-eigen.analysis(M, zero=TRUE)
+eigen(M)
+?eigen
+?barplot
+barplot(a$stable.stage,width=0.5,main="Stable stage distribution for NZ SRW",ylim=c(0,1),
+        axes="T",cex.names=c("Calf","Juvenile","Adult"),xlab="Stage",ylab="Percentage of population")
+
+a$stable.stage
+
+```
+
+
+#vital rate distributions
+
+```{r vital rates}
+
+#Vital rate distributions
+#Anthony Davidson
+#09102013
+
+
+library(coda)
+
+#Setting up vital rate sampling populations
+#calf survivial
+    post1 <- runif(100000,0.88,0.96)
+       #SA calf survival
+             Brandao2012<- dnorm(100000,0.914,0.050)
+  
+#Adult survival
+post2 <- runif(100000,0.958,0.988)
+
+#Transition probability
+post3<-runif(100000,0,1)
+
+#Calving interval
+post4<-runif(100000,2,4)
+
+?runif
+str(post1)
+head(post1)
+plot(post1)
+par(mfrow=c(1,1))
+
+#PLot distributions
+#Adding normal distribution SE from SA SRW population from hessian matrix
+#The orginal estimate from BraNDAO by itself
+#AS well as confidence interval
+
+ahigh<-0.914+1.96*0.050
+alow<-0.914-1.96*0.050
+
+# .x <- seq(ahigh, alow, length.out=1000)
+# plotDistr(.x, dnorm(.x, 
+#                     mean=0.914, sd=0.050), cdf=FALSE, 
+#           xlab="x", ylab="Density",
+#           main=paste("Normal Distribution:  Mean=0, Standard deviation=1"))
+# remove(.x)
+
+#Calf survivial distribution 
+
+hist(post1,breaks=1000,xlim=c(0.7,1),main="Calf Survival",xlab="Survival rate")
+title(main="Calf Survival",xlab="Survival probability")
+abline(a=NULL,b=NULL,h=NULL,v=ahigh,col="red",lwd = 3)
+abline(a=NULL,b=NULL,h=NULL,v=alow,col="red",lwd = 3)
+
+legend("bottomleft",c("South African 95% CI"), col = c("red"),
+       text.col = c("Black"), lty = c(1, 3),lwd=c(3,3),merge = TRUE, bg = "gray90")
+
+#Juvenile and adult survivial distribution 
+
+hist(post2,breaks=1000,xlim=c(0.8,1),main="Juv and Adult Survival",xlab="Survival probability")
+
+#abline(a=NULL,b=NULL,h=NULL,v=ahigh,col="red",lwd = 3)
+#abline(a=NULL,b=NULL,h=NULL,v=alow,col="red",lwd = 3)
+#legend("bottomleft",c("South African 95% CI"), col = c("red"),
+ #      text.col = c("Black"), lty = c(1, 3),lwd=c(3,3),merge = TRUE, bg = "gray90")
+
+
+#Transition distribution 
+
+hist(post3,breaks=1000,xlim=c(0,1),main="Juv Transition",xlab="Survival probability")
+#abline(a=NULL,b=NULL,h=NULL,v=ahigh,col="red",lwd = 3)
+#abline(a=NULL,b=NULL,h=NULL,v=alow,col="red",lwd = 3)
+#legend("bottomleft",c("South African 95% CI"), col = c("red"),
+ #      text.col = c("Black"), lty = c(1, 3),lwd=c(3,3),merge = TRUE, bg = "gray90")
+
+
+#Calving interval distribution 
+
+hist(post4,breaks=1000,xlim=c(1,6),main="Calving interval",xlab="Survival probability")
+abline(a=NULL,b=NULL,h=NULL,v=3.4,col="red",lwd = 3)
+abline(a=NULL,b=NULL,h=NULL,v=2.84,col="red",lwd = 3)
+legend("topright",c("NZ SRW 95% CI"), col = c("red"),
+       text.col = c("Black"), lty = c(1, 3),lwd=c(3,3),merge = TRUE, bg = "gray90")
+
+#orginal
+#??plotDistr
+#.x <- seq(-3.291, 3.291, 
+ #         length.out=1000)
+#plot(.x, dnorm(.x, 
+   #                 mean=0, sd=1), cdf=FALSE, 
+  #        xlab="x", ylab="Density", 
+ #         main=paste("Normal Distribution:  Mean=0, Standard deviation=1"))
+#remove(.x)
+
+```
+
+
+
+
+
+
+
+#transisiton parameter discussion
+
+```{r}
+#Growth rate for different transition 
+
+#growth rate analysis 
+#13/09/2013
+#Ant
+1434*2
+library(quadprog)
+library(popbio)
+
+#Basic matrix population model
+
+#################fixed parameters##############
+#stage length
+C<-1
+J<-7.74
+A<-65
+
+#Survival 
+Sc<-0.914
+Sj<-0.98
+Sa<-0.98
+
+#transition
+Tc<-1 #because it is 100 percent transition
+Tj<-0.1235
+Ta<-0 #because there is no transition
+
+#reproduction
+Ma<-(1/3.14)/2
+
+Fa<-(Sa*Ma)
+
+#########setting up matrix and array's##############
+
+A <-matrix(c(0,(Sc*1),0,0,(Sj*(1-Tj)),(Sj*Tj),(Fa),0,(Sa)),nrow=3)
+A
+
+#Using popbio find dominantsssssss =eigen value :)
+eigen.analysis(A, zero=TRUE)
+eigen(A)
+?eigen
+
+#################fixed parameters##############
+#stage length
+C<-1
+J<-7.74
+A<-65
+
+#Survival 
+Sc<-0.914
+Sj<-0.98
+Sa<-0.98
+
+#transition
+Tc<-1 #because it is 100 percent transition
+Tj<-0.1150
+Ta<-0 #because there is no transition
+
+#reproduction
+Ma<-(1/3.14)/2
+
+Fa<-(Sa*Ma)
+
+#########setting up matrix and array's##############
+
+B <-matrix(c(0,(Sc*1),0,0,(Sj*(1-Tj)),(Sj*Tj),(Fa),0,(Sa)),nrow=3)
+B
+
+#Using popbio find dominantsssssss =eigen value :)
+eigen.analysis(B, zero=TRUE)
+eigen(B)
+?eigen
+
+#################fixed parameters##############
+#stage length
+C<-1
+J<-7.74
+A<-65
+
+#Survival 
+Sc<-0.914
+Sj<-0.98
+Sa<-0.98
+
+#transition
+Tc<-1 #because it is 100 percent transition
+Tj<-0.0979
+Ta<-0 #because there is no transition
+
+#reproduction
+Ma<-(1/3.14)/2
+
+Fa<-(Sa*Ma)
+
+#########setting up matrix and array's##############
+
+C <-matrix(c(0,(Sc*1),0,0,(Sj*(1-Tj)),(Sj*Tj),(Fa),0,(Sa)),nrow=3)
+C
+
+#Using popbio find dominantsssssss =eigen value :)
+eigen.analysis(C, zero=TRUE)
+eigen(C)
+eigen(B)
+eigen(A)
+
+```
+

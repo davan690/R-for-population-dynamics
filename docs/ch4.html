@@ -279,14 +279,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">1.1.2</span> Resampling</h3>
 <p>Using random deviates works great for creating new random numbers, but what if you already have a set of numbers that you wish to introduce randomness to? For this, you can use <strong>resampling techniques</strong>. In R, the <code>sample()</code> function is used to sample <code>size</code> elements from the vector <code>x</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="ch4.html#cb5-1"></a><span class="kw">sample</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">size =</span> <span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## [1] 1 4 6 2 5</code></pre>
+<pre><code>## [1] 1 2 4 9 8</code></pre>
 <p>You can sample with replacement (where it is possible to sample the same element two or more times):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="ch4.html#cb7-1"></a><span class="kw">sample</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> T)</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot; &quot;a&quot; &quot;c&quot; &quot;c&quot; &quot;a&quot; &quot;c&quot; &quot;a&quot; &quot;b&quot; &quot;b&quot; &quot;a&quot;</code></pre>
+<pre><code>##  [1] &quot;c&quot; &quot;b&quot; &quot;c&quot; &quot;c&quot; &quot;c&quot; &quot;b&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot; &quot;a&quot;</code></pre>
 <p>You can set probabilities on the sampling of different elements<a href="sim-examples.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="ch4.html#cb9-1"></a><span class="kw">sample</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;live&quot;</span>, <span class="st">&quot;die&quot;</span>), <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">replace =</span> T,</span>
 <span id="cb9-2"><a href="ch4.html#cb9-2"></a>       <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span></code></pre></div>
-<pre><code>##  [1] &quot;die&quot;  &quot;die&quot;  &quot;live&quot; &quot;live&quot; &quot;live&quot; &quot;live&quot; &quot;live&quot; &quot;live&quot; &quot;live&quot; &quot;live&quot;</code></pre>
+<pre><code>##  [1] &quot;live&quot; &quot;die&quot;  &quot;live&quot; &quot;live&quot; &quot;live&quot; &quot;die&quot;  &quot;live&quot; &quot;die&quot;  &quot;live&quot; &quot;live&quot;</code></pre>
 <p>Notice that this is the same as the binomial random process above, but with only 10 trials and the printing of the outcomes rather than the number of successes.</p>
 </div>
 </div>

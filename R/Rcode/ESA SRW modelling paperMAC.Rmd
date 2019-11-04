@@ -1,0 +1,129 @@
+---
+title: "NZ SRW Modelling Report"
+author: "Anthony Davidson"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  pdf_document: default
+  html_document: default
+geometry: margin=0.1in
+fontsize: 14pt
+---
+
+#Raw data
+<!--The data frame imported from Will is as follows:-->
+This is where I would like to put the estimates of population size for SRWs that has been estimated...
+
+For example:
+
+??
+
+
+```{r setup, echo=FALSE, warning = FALSE, message = FALSE}
+#NZJFMS manuscript
+#15032017
+#Anthony Davidson
+
+#packages
+library(boot) 
+library(dplyr)
+library(ggplot2)
+library(quadprog)
+library(popbio)
+
+#set working dir
+#laptop
+setwd("C:/Users/s435389/Dropbox/ESR Publication Matrix model/All_final_analysis")
+#work desktop
+
+###############################DATA####################################
+#dat <- read.csv("RawCI.csv", header=T, quote="\"")
+```
+
+##Population growth rate
+```{r}
+#growth rate analysis 
+#Basic matrix population model
+
+#################fixed parameters##############
+#stage length
+C<-1
+J<-7.74
+A<-65
+
+#Survival 
+Sc<-0.914
+Sj<-0.98
+Sa<-0.98
+
+#transition
+Tc<-1 #because it is 100 percent transition
+Tj<-0.09083720
+Ta<-0 #because there is no transition
+
+#reproduction
+Ma<-(1/3.14)/2
+
+Fa<-(Sa*Ma)
+
+#########setting up matrix and array's##############
+
+M <-matrix(c(0,(Sc*1),0,0,(Sj*(1-Tj)),(Sj*Tj),(Fa),0,(Sa)),nrow=3)
+M
+
+#Using popbio find dominantsssssss =eigen value :)
+eigen.analysis(M, zero=TRUE)
+eigen(M)
+```
+
+##Simulation using matrix
+```{r population_projection}
+#Growth rate plots
+#To be contiuned from growth rate code
+#29062014
+#Anthony Davidson
+
+#Growth rate plot 30 years
+eigen(M)$value[1]
+
+Time<-30
+Stages<-3
+iter<-1000
+N_total<-1221
+
+growth_check<-array(NA,dim=iter)
+
+
+Popsize<-matrix(NA,ncol=Time,nrow=iter)
+popsize_run<-array(NA,dim=Time)
+finalsize <-array(NA,dim=iter)
+
+
+for(i in 1:iter){
+  N<-matrix(NA,ncol=Time,nrow=Stages)
+  
+  N[1,1]<-407
+  N[2,1]<-407
+  N[3,1]<-407
+  
+  for(t in 2:Time){
+    N[ ,t]<-M%*%N[ ,t-1]
+    popsize_run[t]=sum(N[ ,t])
+    
+  }
+
+  Popsize[i,]<-popsize_run
+}
+
+
+#######################Ploting size 30 data set########################
+
+#plot information total population size for 30 runs
+
+plot(N[1,],main="Exponential growth under current model conditions",col="red",xlab="Time in years ",ylab="Projected population size",type="l",lwd=2,ylim=c(0,6000))
+lines(N[2,],type="l",col="blue",lwd=2)
+lines(N[3,],type="l",col="green",lwd=2)
+legend(5,4000, title="Legend",c("Calves", "Juvenile", "Adults"), col = c("red", "blue", "green"),
+       text.col = "black", lwd = c(2, 2, 2),
+       merge = TRUE, bg = "gray90")
+```
+

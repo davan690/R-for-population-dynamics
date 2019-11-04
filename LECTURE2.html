@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="NRES 470/670" />
+
+
+<title>Intro to population ecology</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/spacelab.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 52px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+
+.section h2 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h3 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h4 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h5 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+.section h6 {
+  padding-top: 57px;
+  margin-top: -57px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">NRES 470/670</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Lectures
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="INTRO.html">Introduction to NRES 470</a>
+    </li>
+    <li>
+      <a href="LECTURE1.html">A whole-systems approach to population ecology</a>
+    </li>
+    <li>
+      <a href="LECTURE2.html">Introduction to population ecology</a>
+    </li>
+    <li>
+      <a href="LECTURE3.html">Thomas Robert Malthus</a>
+    </li>
+    <li>
+      <a href="LECTURE4.html">Population Regulation</a>
+    </li>
+    <li>
+      <a href="LECTURE5.html">Passenger Pigeon</a>
+    </li>
+    <li>
+      <a href="LECTURE6.html">Age-structured populations</a>
+    </li>
+    <li>
+      <a href="LECTURE7.html">Matrix population models</a>
+    </li>
+    <li>
+      <a href="LECTURE8.html">Stochastic population models</a>
+    </li>
+    <li>
+      <a href="LECTURE9.html">Small population paradigm</a>
+    </li>
+    <li>
+      <a href="LECTURE10.html">Individual-based models</a>
+    </li>
+    <li>
+      <a href="LECTURE11.html">Declining population paradigm</a>
+    </li>
+    <li>
+      <a href="LECTURE12.html">Population Viability Analysis</a>
+    </li>
+    <li>
+      <a href="LECTURE13.html">Metapopulations</a>
+    </li>
+    <li>
+      <a href="LECTURE14.html">PVA example: pdogs and ferrets</a>
+    </li>
+    <li>
+      <a href="LECTURE15.html">Parameter estimation</a>
+    </li>
+    <li>
+      <a href="LECTURE16.html">Species interactions: competition</a>
+    </li>
+    <li>
+      <a href="LECTURE17.html">Species interactions: prey-predator</a>
+    </li>
+    <li>
+      <a href="LECTURE18.html">Wrap-up</a>
+    </li>
+    <li>
+      <a href="PVA1_421.html">NRES421: PVA basics</a>
+    </li>
+    <li>
+      <a href="PVA2_421.html">NRES421: grizzly PVA</a>
+    </li>
+    <li>
+      <a href="PVA3_421.html">NRES421: loggerhead PVA</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Labs
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="LAB1.html">Lab 1: exponential growth</a>
+    </li>
+    <li>
+      <a href="LAB2.html">Lab 2: logistic growth</a>
+    </li>
+    <li>
+      <a href="LAB3.html">Lab 3: age-structured population growth</a>
+    </li>
+    <li>
+      <a href="LAB4.html">Lab 4: matrix population models</a>
+    </li>
+    <li>
+      <a href="LAB5.html">Lab 5: stochasticity and uncertainty</a>
+    </li>
+    <li>
+      <a href="LAB6.html">Lab 6: metapopulations</a>
+    </li>
+    <li>
+      <a href="LAB7.html">Lab 7: capture-mark-recapture</a>
+    </li>
+    <li>
+      <a href="Lab8_muledeer.docx">Lab 8: mule deer PVA</a>
+    </li>
+    <li>
+      <a href="PDH_KnownFate.zip">Lab 8: mule deer MARK file</a>
+    </li>
+    <li>
+      <a href="FINAL_PROJECTS.html">Final Projects!</a>
+    </li>
+    <li>
+      <a href="EXTRA_CREDIT.html">Extra Credit!</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="Links.html">Links</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Intro to population ecology</h1>
+<h4 class="author"><em>NRES 470/670</em></h4>
+<h4 class="date"><em>Jan 19, 2017</em></h4>
+
+</div>
+
+
+<div class="figure">
+<img src="Human_population_growth_from_1800_to_2000.png" />
+
+</div>
+<div id="central-questions-of-population-ecology" class="section level2">
+<h2>Central Questions of Population Ecology</h2>
+<div id="ecological" class="section level3">
+<h3>Ecological</h3>
+<ul>
+<li>Why are some species more abundant than others?<br />
+</li>
+<li>What causes population densities to vary in space and time?<br />
+</li>
+<li>What causes populations to become extirpated? Recolonized?<br />
+</li>
+<li>What processes regulate population growth?
+<ul>
+<li>Extrinsic vs intrinsic factors (Nicholson vs Andrewartha debate)</li>
+</ul></li>
+<li>What prevents predator-prey relationships from collapsing?<br />
+</li>
+<li>What factors allow competitors to coexist?</li>
+<li>What factors allow metapopulations to be stable?</li>
+</ul>
+<div class="figure">
+<img src="White-tailed_deer.jpg" />
+
+</div>
+</div>
+<div id="conservation-and-management" class="section level3">
+<h3>Conservation and Management</h3>
+<ul>
+<li>What is the conservation status of a focal species or population?</li>
+<li>How do anthropogenic structures and land uses affect populations?</li>
+<li>What is the <em>Maximum Sustainable Yield</em> for a focal game species?</li>
+<li>How can pest species be most effectively controlled?</li>
+<li>What land areas are most important for preserving at-risk populations?</li>
+</ul>
+</div>
+</div>
+<div id="what-is-a-population" class="section level2">
+<h2>What is a population?</h2>
+<p>From Krebs (1972): “A population is defined as a group of organisms of the same species occupying a particular space at a particular time, with the potential to breed with each other”</p>
+<p>Spatial boundaries defining populations sometimes are easily definte, but more typically are vague and difficult to determine.</p>
+<p>Population size, or abundance, is often represented as <span class="math inline">\(N\)</span>, and is the most basic measurement of a wild population.</p>
+</div>
+<div id="exponential-growth-the-fundamental-principle-of-population-ecology" class="section level2">
+<h2>Exponential growth: the fundamental principle of population ecology</h2>
+<div class="figure">
+<img src="puffball1.png" />
+
+</div>
+<p>Giant puffballs produce 7 trillion offspring in one reproductive event … If all of those individuals reached adulthood, the descendants from just two parent puffballs would weigh more than the entire planet in two generations!</p>
+<p>The reason? Populations grow geometrically, a process called <strong>exponential growth</strong>. This is the most basic concept in population ecology. We will go over this concept in detail in upcoming in-class activities and labs.</p>
+</div>
+<div id="mathematics-and-population-ecology" class="section level2">
+<h2>Mathematics and Population Ecology</h2>
+<p>“Mathematics seems to endow one with a new sense.”<br />
+- Charles Darwin</p>
+<p>“Like most mathematicians, he takes the hopeful biologist to the edge of the pond, points out that a good swim will help his work, and then pushes him in and leaves him to drown.”<br />
+- Charles Elton, in reference to a work by Alfred Lotka</p>
+<div class="figure">
+<img src="1976_Elton.jpg" />
+
+</div>
+<p>The importance of the method is this: if we know certain variables, mostly desired by ecologists and in some cases already determined by them, we can predict certain results which would not normally be predictable or even expected by ecologists. The stage of verification of these mathematical predictions has hardly begun; but their importance cannot be under-estimated, and we look forward to seeing the further volumes of Lotka’s studies.<br />
+- Charles Elton</p>
+</div>
+<div id="population-ecology-is-central-to-many-of-the-most-pressing-questions-in-modern-day-ecology-and-evolution" class="section level2">
+<h2>Population ecology is central to many of the most pressing questions in modern day ecology and evolution</h2>
+<p>This class is mostly about how important Population Ecology is to wildlife conservation and management. But it is worth mentioning that Population Ecology is a very active field of basic science, and that population ecology is at the core of many of the central questions of ecology and evolution.</p>
+<p>These questions are from <a href="http://onlinelibrary.wiley.com/doi/10.1111/1365-2745.12025/full">Sutherland et al. 2012</a>. This paper is on WebCampus (optional). Of course there are many more interesting questions- limited only by your imagination.</p>
+<p>You may not understand all these questions now- we will revisit this list at the end of the semester!</p>
+<div class="figure">
+<img src="Fragmentation1.jpg" />
+
+</div>
+<ul>
+<li>What are the evolutionary consequences of species becoming less connected through <strong>fragmentation</strong> or more connected through globalization?</li>
+</ul>
+<div class="figure">
+<img src="Juniperus_range_map.gif" />
+
+</div>
+<ul>
+<li><p>What are the evolutionary and ecological mechanisms that govern species’ <strong>range margins</strong>?</p></li>
+<li><p>How does <strong>environmental stochasticity</strong> and environmental change interact with density-dependence to generate population dynamics and species distributions?</p></li>
+<li><p>How can we upscale detailed processes at the level of individuals (e.g., behavioral interactions) into patterns at the population scale?</p></li>
+<li><p>How important is <strong>individual variation</strong> to population, community and ecosystem dynamics?</p></li>
+<li><p>How do species and population traits and landscape conﬁguration interact to determine realized <strong>dispersal distances</strong>?</p></li>
+<li><p>To what degree do trans-generational effects on life histories, such as <strong>maternal effects</strong>, impact on population dynamics?</p></li>
+<li><p>How does covariance among life-history traits affect their contributions to population dynamics?</p></li>
+</ul>
+<div class="figure">
+<img src="Wolves_and_bones.jpg" />
+
+</div>
+<ul>
+<li>What is the relative importance of direct (<strong>predation, competition</strong>) vs. indirect (induced behavioural change) interactions in determining the effect of one species on others?</li>
+</ul>
+<div class="figure">
+<img src="Gopherus_agassizii.jpg" />
+
+</div>
+<ul>
+<li>What demographic traits determine the <strong>resilience</strong> of natural populations to disturbance and perturbation?</li>
+</ul>
+<div id="and-many-more" class="section level4">
+<h4>And many more!</h4>
+<ul>
+<li>In what ecological settings are <strong>parasites</strong> key regulators of population dynamics?<br />
+</li>
+<li>How does species loss affect the extinction risk of the remaining species?<br />
+</li>
+<li>How important are <strong>dynamical extinction-recolonization equilibria</strong> to the persistence of species assemblages in fragmented landscapes?<br />
+</li>
+<li>How do <strong>resource pulses</strong> affect resource use and interactions between organisms?<br />
+</li>
+<li>How important are rare species in the functioning of ecological communities?<br />
+</li>
+<li>What is the magnitude of the <strong>‘extinction debt’</strong> following the loss and fragmentation of natural habitats, and when will it be paid?<br />
+</li>
+<li>To what extent will climate change uncouple trophic links due to phenological change?<br />
+</li>
+<li>How do natural populations and communities respond to increased frequencies of <strong>extreme weather events</strong> predicted under global climate change?<br />
+</li>
+<li>In the face of rapid environmental change, what determines whether species adapt, shift their ranges or go extinct?<br />
+</li>
+<li>What determines the rate at which species distributions respond to climate change?<br />
+</li>
+<li>Under what circumstances do landscape structures such as <strong>corridors</strong> and <strong>stepping stones</strong> play important roles in the distribution and abundance of species?<br />
+</li>
+<li>How do <strong>interspeciﬁc interactions</strong> affect species responses to global change?<br />
+</li>
+<li><p>To what extent are widely studied ecological patterns (species-abundance distribution, <strong>species-area relationship</strong>, etc.) the outcomes of statistical rather than ecological processes?</p></li>
+<li><p>How much does modelling <strong>feedbacks</strong> from the observation process, such as the responses of organisms to data collectors, improve our ability to infer ecological processes?</p></li>
+</ul>
+<div class="figure">
+<img src="positivefeedback1.gif" />
+
+</div>
+</div>
+</div>
+<div id="in-class-exercise-feedbacks" class="section level2">
+<h2>In-class Exercise: Feedbacks</h2>
+<p><strong>Feedbacks</strong> occur when the inflows and outflows (e.g., births and deaths) depend upon the value of the stock (e.g., a wildlife population!).</p>
+<p>Feedbacks are what lead to complex (“interesting”) system behaviors.</p>
+<p>A reinforcing, or <strong>positive feedback</strong> (often called a “vicious circle”) leads to <em>exponential growth</em>, leading often to craziness! If you don’t understand this yet, you will see soon enough!</p>
+<p>A <strong>negative feedback</strong> is stabilizing, leading to nice, orderly, regulated systems (and homeostasis in organismal biology!).</p>
+<p>In the previous in-class exercise the model structure produced linear growth as the [Flow] added to the [Stock].</p>
+<ol style="list-style-type: decimal">
+<li>What do the following have in common: snowball, people, rabbits, fire, bacteria, fleas, savings accounts, cancer?</li>
+</ol>
+<p>Let’s model this to better understand this process.</p>
+<p>This model adds a <strong>feedback</strong> using a [Link] from the [Stock] to the [Flow]. The [Link] communicates the value of the [Stock] to the [Flow]. A [Link] only communicates value, it doesn’t change the value of the [Stock] (that is what a [Flow] does).</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Open InsightMaker. Create an accumulator with a [Stock] and a [Flow] as you did in the previous model (flow should be an input, not an output) and name them <em>Stock</em> and <em>Flow</em> for now.</p></li>
+<li><p>If you mouse over <em>Stock</em> or <em>Flow</em> a small [<span class="math inline">\(=\)</span> Sign] will appear. If you click this it will open the <strong>Equation</strong> window where you can set values. Open this window for the [Stock], enter a value of 1, then close the window.</p></li>
+<li><p>The value of the [Stock] can be communicated to the [Flow] with a [Link]. To create a [Link], click <strong>Link</strong> in the <strong>Connections</strong> part of the toolbar. When you mouse over the [Stock] click on the right-arrow, drag to the [Flow] and release. You now have a [Link] on top of the [Flow]. Now hold the Shift Key and click in the middle of the [Link] and a little little green node will be created on the [Link]. You can select this node and drag it up so the [Link] isn’t directly on the [Flow]. Create a few more nodes on the [Link] and move them to create something more like a curve.</p></li>
+<li><p>Usually there is some type of factor governing the rate the [Stock] influences the [Flow]. Let’s introduce a variable named <em>factor</em>. To create a variable, right-click on the canvas and select <strong>Variable</strong> from the drop-down. While the [Variable] is still selected rename it <em>factor</em>. Now draw a [Link] from <em>factor</em> to the [Flow]. Open the [Equation] window for <em>factor</em> and set it to 0.5.</p></li>
+<li><p>Open the <strong>Equation</strong> window for the [Flow] and set it to [Stock] times [factor]. That is, the rate of inflow into the [Stock] is equal to the value of the [Stock] multiplied by the value of <em>factor</em>.</p></li>
+<li><p>Now click [Run Simulation] and you have just finished your first reinforcing loop simulation model!</p></li>
+</ol>
+<p><strong>Q:</strong> If [Stock] is a population – say, rabbits – then what is the interpretation of [Flow]? What is the interpretation of [factor]? Rename your variables accordingly and change the parameters to make the more biologically realistic. Run the simulation again.</p>
+<ol start="10" style="list-style-type: decimal">
+<li>Just like in the last exercise, set the “Show Value Slider” to Yes for all stocks and flows. Now you can play around with the values, re-running the simulation each time. Think about question 1 while doing this (snowball, people, rabbits, fire, bacteria, fleas, savings accounts, cancer). How would you change the values to represent each of these quantities. Pick 2 or more of these and try it out!</li>
+</ol>
+<p>You should notice that the population tends to grow slowly at first and then very rapidly. This is referred to as <em>exponential growth</em>. If you’ve read the first chapter of the Gotelli book, you will recognize this as the <em>foundational concept of population ecology</em>!</p>
+<p><strong>Q</strong> Can you model the puffball example from earlier in the lecture? How many giant puffballs are in the population after two generations??</p>
+<p><strong>Q</strong> Can you (approximately) replicate the human population graph at the beginning of this lecture? What is the per-capita growth rate of the human population??</p>
+<p>And just for fun, here is a <a href="https://www.youtube.com/watch?v=DZCm2QQZVYk">video</a> about exponential growth you might want to check out..</p>
+<p><a href="LECTURE3.html">–go to next lecture–</a></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

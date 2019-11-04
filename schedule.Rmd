@@ -1,0 +1,25 @@
+---
+title: "Schedule, Spring 2018"
+author: "NRES 470"
+date: "January, 2018"
+output: 
+  html_document: 
+    theme: spacelab
+    toc: no
+    toc_float: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Please check for updates frequently!
+
+```{r include=FALSE}
+courseSchedule <- read.csv("CourseSchedule.csv")
+```
+
+```{r results='asis', echo=FALSE}
+knitr::kable(courseSchedule,caption="")
+
+```
