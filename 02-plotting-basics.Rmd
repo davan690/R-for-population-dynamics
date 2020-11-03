@@ -82,9 +82,9 @@ plot(x = x, y = y,
 
 Note that the first two arguments, `x` and `y`, specify the coordinates of the points (i.e., the first point is placed at coordinates `x[1]`,`y[1]`). `plot()` has _tons_ of arguments (or _graphical parameters_ as the help file found using `?plot` or `?par` calls them) that change how the plot looks. Note that when you want something displayed verbatim on the plotting device, you must wrap that code in `" "`, i.e., the arguments `xlab`, `ylab`, and `main` all receive a character vector of length 1 as input. 
 
-Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-html)" else "\\@ref(tab:plot-arg-table-pdf)"` shows information on just a handful of the plotting settings to get you started.
+Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-htmlp)" else "\\@ref(tab:plot-arg-table-pdfp)"` shows information on just a handful of the plotting settings to get you started.
 
-```{r plot-arg-table-html, echo = F, results = "asis", eval = is_html_output()}
+```{r plot-arg-table-htmlp, echo = F, results = "asis", eval = is_html_output()}
 pars = c("`xlab`", "`ylab`", "`main`", "`cex`", "`pch`", "`xlim`", "`ylim`", "`type`",
          "`lty`", "`lwd`", "`col`")
 
@@ -110,7 +110,7 @@ knitr::kable(df,
              caption = "Several of the key arguments to high- and low-level plotting functions")
 ```
 
-```{r plot-arg-table-pdf, echo = F, eval = is_latex_output()}
+```{r plot-arg-table-pdfp, echo = F, eval = is_latex_output()}
 pars = c("xlab", "ylab", "main", "cex", "pch", "xlim", "ylim", "type",
          "lty", "lwd", "col")
 
@@ -154,7 +154,7 @@ kable(
   column_spec(1:2, monospace = T)
 ```
 
-You are advised to try at least some of the arguments in Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-html)" else "\\@ref(tab:plot-arg-table-pdf)"` out for yourself with your `plot(x, y)` code from above - notice how every time you run `plot()`, a whole new plot is created, not just the thing you changed. There are definitely other options: check out `?plot` or `?par` for more details. 
+You are advised to try at least some of the arguments in Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-htmlpp)" else "\\@ref(tab:plot-arg-table-pdfp)"` out for yourself with your `plot(x, y)` code from above - notice how every time you run `plot()`, a whole new plot is created, not just the thing you changed. There are definitely other options: check out `?plot` or `?par` for more details. 
 
 ## Lower Level Plotting Functions
 
@@ -172,7 +172,7 @@ plot(x = x, y = y, xlab = "x-axis label goes here", ylab = "y-axis label goes he
 points(x = rev(x), y = y, col = "blue", pch = 16)
 ```
 
-Here, `points()` acted like a low-level plotting function because it added points to a plot you already made. Many of the arguments shown in Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-html)" else "\\@ref(tab:plot-arg-table-pdf)"` can be used in both high-level and low-level plotting functions (notice how `col` and `pch` were used in `points()`). Just like `points()`, there is also `lines()`:
+Here, `points()` acted like a low-level plotting function because it added points to a plot you already made. Many of the arguments shown in Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-htmlp)" else "\\@ref(tab:plot-arg-table-pdfp)"` can be used in both high-level and low-level plotting functions (notice how `col` and `pch` were used in `points()`). Just like `points()`, there is also `lines()`:
 
 ```{r, eval = F}
 lines(x = x, y = x, lty = 2, col = "red")
@@ -353,7 +353,7 @@ hist(t_hrs, breaks = breaks, main = "Tournament", col = "grey")
 
 Here, you changed the graphical parameters of the graphics device by using the `par()` function. Once you change the settings in `par()`, they will remain that way until you start a new device.
 
-The `par()` function is central to fine-tuning your graphics. Here, the `xaxs = "i"` and `yaxs = "i"` arguments essentially removed the buffer between the data and the axes. `par()` has options to change the size of the margins, add outer margins, change colors, etc. Some of the graphical parameters that can be passed to high- and low-level plotting functions (like those in Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-html)" else "\\@ref(tab:plot-arg-table-pdf)"`) can also be passed `par()`. Check out the help file (`?par`) to see everything it can do. If you want to start over with fresh `par()` settings, start a new device.
+The `par()` function is central to fine-tuning your graphics. Here, the `xaxs = "i"` and `yaxs = "i"` arguments essentially removed the buffer between the data and the axes. `par()` has options to change the size of the margins, add outer margins, change colors, etc. Some of the graphical parameters that can be passed to high- and low-level plotting functions (like those in Table `r if(is_html_output()) "\\@ref(tab:plot-arg-table-htmlp)" else "\\@ref(tab:plot-arg-table-pdfp)"`) can also be passed `par()`. Check out the help file (`?par`) to see everything it can do. If you want to start over with fresh `par()` settings, start a new device.
 
 The `mar` argument controls how many lines of margin text are on each side of the plotting region: `mar[1]` is the bottom margin, `mar[2]` is left, `mar[3]` is top, and `mar[4]` is right. There is also `par(oma = c())` for outer margins. You can specify these in inch units instead of margin lines using the `mai` or `omi` arguments.
 

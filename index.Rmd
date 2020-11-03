@@ -1,4 +1,4 @@
---- 
+---
 title: "Introduction to R for Population dynamics"
 author: "Anthony Davidson"
 date: "Build from Ben Statons R book with contributions by Henry Hershey"
@@ -10,13 +10,13 @@ biblio-style: apalike
 link-citations: true
 linkcolor: "blue"
 urlcolor: "blue"
-github-repo: bstaton1/au-r-workshop
-description: "This is a first course in R programming for natural resource scientists. It was developed and has been primarily instructed at Auburn University."
+github-repo: davan690
+description: "This is a first course in R programming for natural resource scientists and ecologists. It was developed by and has been primarily instructed at Auburn University."
 ---
 
 # Overview{-#overview}
 
-To begin with this model defines the life cycle of a species, then extendes this to estimate population size and growth rate over a projected time frame and then analysis the elasticity and sensistivity of the matrix population model. I have done this with southern right whales as an example.
+To begin with this model defines the life cycle of a species, then extended this to estimate population size and growth rate over a projected time frame and then analysis the elasticity and sensitivity of a matrix population model. I have done this with examples from my research on southern right whales and invasive species in NZ.
 
 ## What is Covered? {-}
 

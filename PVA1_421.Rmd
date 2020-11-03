@@ -69,10 +69,10 @@ The reason? Populations grow *geometrically*, in a process called **exponential 
 
 "Mathematics seems to endow one with a new sense."    
   - Charles Darwin   
-  
+
 “Like most mathematicians, he takes the hopeful biologist to the edge of the pond, points out that a good swim will help his work, and then pushes him in and leaves him to drown.”   
   - Charles Elton, in reference to a work by Alfred Lotka   
-  
+
 ![](1976_Elton.jpg)
 
 "The importance of the method is this: if we know certain variables, mostly desired by ecologists and in some cases already determined by them, we can predict certain results which would not normally be predictable or even expected by ecologists. The stage of verification of these mathematical predictions has hardly begun; but their importance cannot be under-estimated."       
@@ -285,7 +285,7 @@ When we use stochastic models, we often want to run lots of **replicates**. Each
 We can then interpret the _cloud of possible futures_ rather than just the results from a single model run!
 
 ![](IM15.jpg)
- 
+
 Here we see that the population went extinct in three replicates, out of a total of 50 replicates. 
 
 **Q**: What is the extinction risk for this population?

@@ -4,5 +4,6 @@ language:
     chapter_name: "Chapter "
 delete_merged_file: true
 output_dir: "docs"
-rmd_files: ["index.Rmd", "04-simulation.Rmd", "05-calving-interval-simulation.Rmd", "06-matrix-pop-model.Rmd", "07-sim-tests.Rmd"]
+#rmd_files: ["index.Rmd", "04-simulation.Rmd", "06-matrix-pop-model.Rmd", "07-sim-tests.Rmd"]
 
+#"05-calving-interval-simulation.Rmd",

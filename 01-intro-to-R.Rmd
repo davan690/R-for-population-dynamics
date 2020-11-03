@@ -31,7 +31,7 @@ When you open up RStudio for the first time, you will see three panes: the left-
 
 To start off, you will use R as a simple calculator. Type these commands (not the lines with `##`, those are output^[The formatting used here includes `##` on output to denote code and output separately. You won't see the `##` show up in your console.]) one at a time and hit **CTRL + ENTER** to run it. The spaces don't matter at all, they are used here for clarity and for styling. To learn more about standard R code styling, check out the section in @adv-r-cite on it^[Hadley Wickham's R code style guide: <http://adv-r.had.co.nz/Style.html>].
 
-```{r Calculator}
+```{r Calculator1}
 3 + 3
 12/4
 ```
@@ -323,7 +323,7 @@ df1$dm = df1$day + df1$month; df1
 
 ## Exercise 1A {-}
 
-Take a break to apply what you've learned so far to enter the data found in Table `r if(is_html_output()) "\\@ref(tab:ex-1-table-html)" else "\\@ref(tab:ex-1-table-pdf)"` into R by hand and do some basic data subsets.
+Take a break to apply what you've learned so far to enter the data found in Table `r if(is_html_output()) "\\@ref(tab:ex-1-table-htmlp)" else "\\@ref(tab:ex-1-table-pdfp)"` into R by hand and do some basic data subsets.
 
 _The solutions to this exercise are found at the end of this book ([here](#ex1a-answers)). You are **strongly recommended** to make a good attempt at completing this exercise on your own and only look at the solutions when you are truly stumped._
 
@@ -334,14 +334,14 @@ Time = c(1000, 1200, 1400, 1600)
 Fish = c(643, 203, 109, 15)
 ```
 
-```{r ex-1-table-html, echo = F, eval = is_html_output()}
+```{r ex-1-table-htmlp, echo = F, eval = is_html_output()}
 kable(data.frame(Lake, Area, Time, Fish), 
       caption = "The table you should enter in to R by hand for Exercise 1A") %>%
   kable_styling(full_width = F) %>%
   column_spec(1:4, width = "5em")
 ```
 
-```{r ex-1-table-pdf, echo = F, eval = is_latex_output()}
+```{r ex-1-table-pdfp, echo = F, eval = is_latex_output()}
 kable(data.frame(Lake, Area, Time, Fish), "latex",
       caption = "The table you should enter in to R by hand for Exercise 1A")
 ```

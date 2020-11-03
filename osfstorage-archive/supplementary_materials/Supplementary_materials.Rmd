@@ -1,0 +1,296 @@
+---
+title: "An Introduction to Bayesian Multilevel Models Using brms: A Case Study of Gender Effects on Vowel Variability in Standard Indonesian"
+author: "Supplementary Materials"
+output:
+  pdf_document:
+      toc: true
+      toc_depth: 2
+csl: apa6.csl
+bibliography: brms_intro.bib
+fontsize: 11pt
+linestretch: 1.1
+---
+
+```{r setup, message = FALSE, warning = FALSE, include = FALSE, results = "hide"}
+library(tidyverse)
+library(shinystan)
+library(emojifont)
+library(patchwork)
+library(ggridges)
+library(viridis)
+library(ellipse)
+library(papaja)
+library(phonR)
+library(broom)
+library(BEST)
+library(lme4)
+library(brms)
+
+# set rstan options
+rstan::rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores() )
+
+# enables / disables caching for all chunks of code
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+# Moderation Analysis
+
+In the current paper, we were interested in knowing whether men and women differ in the way they pronounce Indonesian vowels. Acknowledging that gender differences might be more similar accross repetitions of the same vowel, we allowed the mean variability (and the difference between men and women) to vary by vowel (by including a by-vowel varying intercept and varying slope). This strategy aimed at increasing the precision of our estimation of the gender effect. But it does not allow us to know whether the effect of gender differs according to the vowel and which vowels are more affected by gender. To answer this question, one might add vowel as a constant factor in the model.
+
+```{r, echo = FALSE}
+##############################################################
+# vowel normalisation and distance computation
+###################################################
+library(phonR)
+data(indoVowels)
+
+indo <-
+    indo %>%
+    mutate(
+        f1norm = 
+            normVowels("wattfabricius",
+                f1 = f1,
+                f2 = f2,
+                vowel = vowel,
+                group = subj)[, 1],
+        f2norm = 
+            normVowels("wattfabricius",
+                f1 = f1,
+                f2 = f2,
+                vowel = vowel,
+                group = subj)[, 2]) %>%
+    group_by(vowel, subj) %>%
+    mutate(distance = 
+            sqrt((f1norm - mean(f1norm) )^2 + (f2norm - mean(f2norm) )^2) ) %>% 
+    mutate(repetition = row_number() ) %>%
+    ungroup() %>%
+    mutate(vowel = paste0("/", vowel, "/") )
+
+vowel_order <-  c("/i/", "/e/", "/a/", "/o/", "/u/")
+
+indo <-
+    indo %>%
+    mutate(
+        # Contrast coding
+        gender = ifelse(indo$gender == "f", -0.5, 0.5) )
+```
+
+This model corresponds to `bmod2` from the main manuscript, to which we added a constant effect for `vowel` as well as an interaction term `gender:vowel`. In R, `vowel` will be internally recoded as a factor, resulting in attributing a specific coefficient by vowel (and for each interaction `gender:vowel`). More precisely, the intercept will be assigned to the first level of the factor, and slopes will be assigned to the other levels.
+
+In the current situation, vowels are alphabetically ordered (/a-e-i-o-u/) so that the intercept represents the mean predicted value of `distance` for vowel /a/ for all participants (without distinction of gender). This model can be implemented using `brms` as follows.
+
+\vspace{5mm}
+
+```{r, message = FALSE}
+library(brms)
+
+prior <- c(
+    prior(normal(0, 10), class = Intercept),
+    prior(normal(0, 10), class = b),
+    prior(cauchy(0, 10), class = sd),
+    prior(cauchy(0, 10), class = sigma)
+    )
+
+bmod <- brm(
+    distance ~ gender * vowel + (1|subj),
+    data = indo, family = gaussian(),
+    prior = prior,
+    warmup = 2000, iter = 10000,
+    chains = 2, cores = parallel::detectCores(),
+    control = list(adapt_delta = 0.99)
+    )
+```
+
+## Interpreting the output
+
+We can retrieve the coefficients for the constant effects using the `broom:tidy()` function, which gives the mean of the posterior distribution along with its standard error and credible interval.
+
+\vspace{5mm}
+
+```{r}
+library(broom)
+tidy(bmod, par_type = "non-varying", prob = 0.95)
+```
+
+\vspace{5mm}
+
+We mentioned above that the intercept represents the mean predicted value of `distance` for vowel /a/ for all participants (which is indeed very similar to `mean(indo$distance[indo$vowel=="/a/"])`).
+
+The slope for `gender` represents the predicted difference betwen men and women concerning the `distance` for vowel /a/. As `gender` was contrast coded, the intercept + 0.5 times the slope for gender gives the model predictions for men concerning vowel /a/, while the intercept + (-0.5) times the slope for gender gives the model prediction for women concerning vowel /a/. One can then study the marginal posterior distribution of each condition, working directly with the posterior samples.
+
+\vspace{5mm}
+
+```{r, fig.align = "center", message = FALSE}
+library(BEST)
+
+# extracting posterior samples
+post <- posterior_samples(bmod, pars = "^b_*")
+
+# extracting predicted values for men
+men <- post[["b_Intercept"]] + 0.5 * post[["b_gender"]]
+
+# plotting the posterior distribution of men
+plotPost(men, xlab = "", col = "#b3cde0", cex = 1)
+```
+
+\vspace{5mm}
+
+Following the same strategy, one can investigate any comparison of interest. For instance, if we are interested in the difference between women and men concerning a specific vowel --say vowel /i/--, we can compute the difference between the model predictions for men and women, and plot this distribution. We simply need to know that interaction terms (e.g., `gender:vowelDiD`) represent deviations from the *baseline* slope for `gender`. Thus, we need to add them to obtain the effect of `gender` for a specific vowel.
+
+\vspace{5mm}
+
+```{r, fig.align = "center"}
+# computing the difference between men and women for vowel /i/
+diff_i <- post[["b_gender"]] + post[["b_gender:vowelDiD"]]
+
+# plotting it
+plotPost(diff_i, xlab = "", col = "#b3cde0", compVal = 0, cex = 1)
+```
+
+\vspace{5mm}
+
+## Visualising predictions
+
+One of the easiest ways to understand the output of the model is probably to plot its predictions. Below we plot the raw data along with the predictions of the model, represented by a horizontal line.
+
+\vspace{5mm}
+
+```{r, echo = FALSE, fig.align = "center"}
+p <- predict(bmod)
+
+indo %>%
+    ggplot(
+        aes(x = as.factor(gender), y = distance, colour = as.factor(gender) ) ) +
+    facet_wrap(~vowel) +
+    geom_jitter(alpha = 0.4, width = 0.3) +
+    geom_violin(alpha = 0.6) +
+    stat_summary(
+        aes(y = p[, 1], group = 1),
+        fun.y = mean, colour = "black", geom = "line") +
+    stat_summary(
+        aes(y = p[, 1], group = 1),
+        fun.y = mean, colour = "black", geom = "point") +
+    scale_colour_brewer(
+        breaks = c("-0.5", "0.5"), labels = c("women", "men"), palette = "Dark2") +
+    theme_bw(base_size = 10) +
+    theme(
+        legend.position = c(0.85, 0.25),
+        legend.title = element_blank(),
+        axis.title.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank() )
+```
+
+\vspace{5mm}
+
+This is consistent with Figure 1 from the main manuscript. While women generally produce vowels with more variability, this gender effect seems more pronounced for open or mid vowels /a-e-o/, and less pronounced for close vowels /u/ and /i/.
+
+# Lognormal and Skew-Normal models
+
+In the following, we fit a model with the same structure as `bmod5` (the last model from the main manuscript), except that we use a different likelihood (i.e., distribution for the residuals). In this case, we fit a lognormal and a skew normal models. Note that the only modification we bring to `bmod5` is that we change the `family` argument in the `brm` function, replacing `gaussian()` by `lognormal()` or `skew_normal()` (but see the `brms` [package documentation](https://cran.r-project.org/web/packages/brms/brms.pdf) for more details).
+
+\vspace{5mm}
+
+```{r, message = FALSE, warning = FALSE, results = "hide"}
+priors <- c(
+    prior(normal(0, 10), class = Intercept),
+    prior(normal(0, 10), class = b, coef = gender),
+    prior(cauchy(0, 10), class = sd),
+    prior(cauchy(0, 10), class = sigma),
+    prior(lkj(2), class = cor)
+    )
+
+bmod5 <- brm(
+    distance ~ gender + (1|subj) + (1+gender|vowel) + (1|subj:vowel),
+    data = indo,
+    family = gaussian(),
+    prior = priors,
+    warmup = 2000, iter = 10000,
+    chains = 2, cores = parallel::detectCores(),
+    control = list(adapt_delta = 0.99)
+    )
+
+bmod6 <- brm(
+    distance ~ gender + (1|subj) + (1+gender|vowel) + (1|subj:vowel),
+    data = indo,
+    family = lognormal(),
+    prior = priors,
+    warmup = 2000, iter = 1e4,
+    chains = 2, cores = parallel::detectCores(),
+    control = list(adapt_delta = 0.99)
+)
+
+bmod7 <- brm(
+    distance ~ gender + (1|subj) + (1+gender|vowel) + (1|subj:vowel),
+    data = indo,
+    family = skew_normal(),
+    prior = priors,
+    warmup = 2000, iter = 1e4,
+    chains = 2, cores = parallel::detectCores(),
+    control = list(adapt_delta = 0.99)
+)
+```
+
+## Model comparison
+
+Once we have fitted these models, we can compare them using the `LOO` function (see section 3 on model comparison).
+
+\vspace{5mm}
+
+```{r, echo = TRUE}
+LOO(bmod5, bmod6, bmod7, cores = parallel::detectCores() )
+```
+
+\vspace{5mm}
+
+This comparison reveals that replacing the Normal likelihood by a lognormal or a skew-normal one, while adding a supplementary parameter to estimate (the alpha parameter for the skew-normal), induced a considerable decrease in LOOIC value (`bmod6` and `bmod7` LOOIC values are approximately 100 points below the LOOIC value of `bmod5`), although being associated with quite a large uncertainty (as expressed by the SE).
+
+## Posterior predictive checking
+
+Another useful diagnostic of the model's predictive abilities is known as *posterior predictive checking* (PPC) and consists in comparing observed data to data simulated from the posterior distribution [e.g.,@Gelman2013]. The idea behing PPC is quite simple: if a model is a good fit, then we should be able to use it to generate data that resemble the data we observed [@Gabry2017]. This is implemented in `brms` with the `pp_check` method, that provides various ways of visualising posterior predictive checks. Below we compare the posterior predictions of the three models we fitted previously (n = 100 simulated samples for each model), to the distribution of the original dataset.
+
+\vspace{5mm}
+
+```{r, echo = TRUE, fig.align = "center", fig.width = 7, fig.height = 3, warning = FALSE}
+pp_bmod5 <-
+    brms::pp_check(bmod5, nsamples = 1e2) +
+    ggtitle("PPC bmod5") +
+    theme_bw(base_size = 10) +
+    theme(legend.position = "none") +
+    xlim(-0.5, 1)
+
+pp_bmod6 <-
+    brms::pp_check(bmod6, nsamples = 1e2) +
+    ggtitle("PPC bmod6") +
+    theme_bw(base_size = 10) +
+    theme(legend.position = "none") +
+    xlim(-0.5, 1)
+
+pp_bmod7 <-
+    brms::pp_check(bmod7, nsamples = 1e2) +
+    ggtitle("PPC bmod7") +
+    theme_bw(base_size = 10) +
+    xlim(-0.5, 1)
+
+library(patchwork) # adding ggplots
+
+pp_bmod5 + pp_bmod6 + pp_bmod7
+```
+
+\vspace{5mm}
+
+This confirms that the Normal model (`bmod5`), while being a convenient and easy to interpret model, can be improved to better predict the particular features of our data. Using a lognormal or a skew-normal likelihood improves the predictions of the model (i.e., the simulated samples seem to be closer to the observed data).
+
+# Session information
+
+```{r, echo = TRUE}
+sessionInfo()
+```
+
+# References
+
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+\setlength{\parskip}{8pt}
+\noindent

@@ -490,9 +490,9 @@ The best model includes `weight` only, although there is not much confidence in 
 
 ## Probability Distributions {#dists}
 
-A probability distribution is a way of representing the probability of an event or value of a parameter and they are central to statistical theory. Some of the most commonly used distributions are summarized in Table `r if(is_html_output()) "\\@ref(tab:dist-table-html)" else "\\@ref(tab:dist-table-pdf)"`, along with the suffixes of the functions in R that correspond to each distribution. For an excellent and ecologically-focused description of probability distributions, checkout Chapter 4 in @emdbook-cite on them^[There is a free proof version online: <https://ms.mcmaster.ca/~bolker/emdbook/book.pdf>]. 
+A probability distribution is a way of representing the probability of an event or value of a parameter and they are central to statistical theory. Some of the most commonly used distributions are summarized in Table `r if(is_html_output()) "\\@ref(tab:dist-table-htmlp)" else "\\@ref(tab:dist-table-pdfp)"`, along with the suffixes of the functions in R that correspond to each distribution. For an excellent and ecologically-focused description of probability distributions, checkout Chapter 4 in @emdbook-cite on them^[There is a free proof version online: <https://ms.mcmaster.ca/~bolker/emdbook/book.pdf>]. 
 
-```{r dist-table-html, results = "asis", echo = F, eval = is_html_output()}
+```{r dist-table-htmlp, results = "asis", echo = F, eval = is_html_output()}
 
 tab = data.frame(
   type = c(rep("Continuous", 4), rep("Discrete", 3)),
@@ -516,7 +516,7 @@ kable(tab, align = "lll", caption = "A brief description of probability distribu
 
 ```
 
-```{r dist-table-pdf, echo = F, eval = is_latex_output()}
+```{r dist-table-pdfp, echo = F, eval = is_latex_output()}
 tab = data.frame(
   dist = c("Normal", "Lognormal", "Uniform", "Beta", "Binomial", "Multinomial", "Poisson"),
   desc = c("Models the relative frequency of outcomes that are symmetric around a mean, can be negative",
@@ -551,7 +551,7 @@ In R, there are four different ways to use each of these distribution functions 
 
 Suppose that $x$ represents the length of individual age 6 largemouth bass in your private fishing pond. Assume that $x \sim N(\mu=500, \sigma=50)$^[English: $x$ is a normal random variable with mean equal to 500 and standard deviation equal to 50]. Here is the usage of each of the distribution functions and a plot illustrating them:
 
-```{r norm-plots, fig.height = 6.5, fig.width = 6.5, fig.cap="The four `-norm` functions with input (x-axis) and output (y-axis) displayed."}
+```{r norm-plotsp, fig.height = 6.5, fig.width = 6.5, fig.cap="The four `-norm` functions with input (x-axis) and output (y-axis) displayed."}
 # parameters
 mu = 500; sig = 50
 # a sequence of possible random variables (fish lengths)
@@ -681,7 +681,7 @@ _The solutions to this exercise are found at the end of this book ([here](#ex3-a
 
 1.  Perform the same analyses as conducted in Section \@ref(lm) (simple linear regression, ANOVA, ANCOVA, ANCOVA with interaction), using `egg_size` as the response variable. The predictor variables you should use are `type` (categorical) and `year`. You should plot the fit for each model separately and perform an AIC analysis. Practice interpreting the coefficient estimates.
 2.  Perform the same analyses as conducted in Section \@ref(glms), this time using a success threshold of 80% survival to the eyed-egg stage (instead of 70%). Use `egg_size` and `type` as the predictor variables. You should plot the fitted lines for each model separately and perform an AIC analysis. Practice interpreting the coefficient estimates.
-3.  Make the same graphic as in Figure \@ref(fig:norm-plots) with at least one of the other distributions listed in Table `r if(is_html_output()) "\\@ref(tab:dist-table-html)" else "\\@ref(tab:dist-table-pdf)"` (other than the multinomial - being a multivariate distribution, it wouldn't work well with this code). Try thinking of a variable from your work that meets the uses of each distribution in Table `r if(is_html_output()) "\\@ref(tab:dist-table-html)" else "\\@ref(tab:dist-table-pdf)"` (or one that's not listed). If you run into trouble, check out the help file for that distribution^[Executing `?rnorm` or any other of the `-norm()` functions will take you to a page with info on all four function types for that distribution]. 
+3.  Make the same graphic as in Figure \@ref(fig:norm-plotsp) with at least one of the other distributions listed in Table `r if(is_html_output()) "\\@ref(tab:dist-table-htmlp)" else "\\@ref(tab:dist-table-pdfp)"` (other than the multinomial - being a multivariate distribution, it wouldn't work well with this code). Try thinking of a variable from your work that meets the uses of each distribution in Table `r if(is_html_output()) "\\@ref(tab:dist-table-htmlp)" else "\\@ref(tab:dist-table-pdfp)"` (or one that's not listed). If you run into trouble, check out the help file for that distribution^[Executing `?rnorm` or any other of the `-norm()` functions will take you to a page with info on all four function types for that distribution]. 
 
 ### Exercise 3 Bonus {-}
 

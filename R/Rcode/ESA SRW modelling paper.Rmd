@@ -16,7 +16,14 @@ fontsize: 14pt
 #NZJFMS manuscript
 #15032017
 #Anthony Davidson
-
+# sets paths for computers with other software components
+# this code block produces an enviroment warning
+# but not sure how to sort depenancies still
+# Feb2020img.png
+# myPaths <- .libPaths("C:/Program Files/R/R-3.6.2/library")
+# myPaths <- c(myPaths)
+# .libPaths(myPaths)  # add new path
+# .libPaths()
 #packages
 library(boot) 
 library(dplyr)
